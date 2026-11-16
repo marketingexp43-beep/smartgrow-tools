@@ -1,0 +1,8 @@
+{
+  "name": "SmartGrow Tools",
+  "description": "Free browser-based SEO tools, social media generators, content writing utilities, and digital marketing calculators built for clarity and speed.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
