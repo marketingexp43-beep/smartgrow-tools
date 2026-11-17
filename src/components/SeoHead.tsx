@@ -11,6 +11,17 @@ interface SeoHeadProps {
 }
 
 const DEFAULT_OG_IMAGE = '/src/assets/images/hero_marketing_workspace_1794855472737.webp';
+const GA_MEASUREMENT_ID = 'G-516BP7Z6RL';
+
+declare global {
+  interface Window {
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
+let lastTrackedPath =
+  typeof window !== 'undefined' ? `${window.location.pathname}${window.location.search}` : '';
 
 function setMetaTag(selector: string, attribute: 'name' | 'property', key: string, content: string) {
   let el = document.querySelector<HTMLMetaElement>(selector);
@@ -43,6 +54,7 @@ export function SeoHead({
 
     if (typeof window !== 'undefined') {
       const origin = window.location.origin;
+      const currentPath = `${window.location.pathname}${window.location.search}`;
       const canonicalUrl = `${origin}${path ?? window.location.pathname}`;
       const absoluteImage = image.startsWith('http') ? image : `${origin}${image}`;
 
@@ -57,6 +69,18 @@ export function SeoHead({
         document.head.appendChild(canonicalLink);
       }
       canonicalLink.setAttribute('href', canonicalUrl);
+
+      if (currentPath !== lastTrackedPath) {
+        lastTrackedPath = currentPath;
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'page_view', {
+            send_to: GA_MEASUREMENT_ID,
+            page_title: title,
+            page_location: window.location.href,
+            page_path: currentPath,
+          });
+        }
+      }
     }
 
     const existingScript = document.getElementById('smartgrow-jsonld');
