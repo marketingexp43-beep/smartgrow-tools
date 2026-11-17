@@ -11,7 +11,7 @@ import {
 } from 'lucide-react';
 import { CATEGORIES, CategoryId, TOOLS } from '../data/tools';
 import { ARTICLES } from '../data/articles';
-import { SeoHead } from '../components/SeoHead';
+import { SeoHead, SITE_URL } from '../components/SeoHead';
 import { SafeImage } from '../components/SafeImage';
 
 const CATEGORY_ICONS: Record<CategoryId, typeof Search> = {
@@ -71,7 +71,7 @@ export function HomePage() {
     }
   };
 
-  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://smartgrowtools.com';
+  const origin = SITE_URL;
 
   const structuredData = {
     '@context': 'https://schema.org',

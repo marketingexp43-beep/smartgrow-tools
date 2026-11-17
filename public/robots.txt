@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://smartgrowtools.com/sitemap.xml
+Sitemap: https://smartgrow-tools.pages.dev/sitemap.xml

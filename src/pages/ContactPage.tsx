@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { CheckCircle2, Mail } from 'lucide-react';
-import { SeoHead } from '../components/SeoHead';
+import { SeoHead, SITE_URL } from '../components/SeoHead';
 
 export function ContactPage() {
   const [name, setName] = useState('');
@@ -42,7 +42,7 @@ export function ContactPage() {
     setSubmitted(false);
   };
 
-  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://smartgrowtools.com';
+  const origin = SITE_URL;
 
   const structuredData = {
     '@context': 'https://schema.org',

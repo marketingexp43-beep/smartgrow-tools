@@ -10,6 +10,7 @@ interface SeoHeadProps {
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
+export const SITE_URL = 'https://smartgrow-tools.pages.dev';
 const DEFAULT_OG_IMAGE = '/src/assets/images/hero_marketing_workspace_1794855472737.webp';
 const GA_MEASUREMENT_ID = 'G-516BP7Z6RL';
 
@@ -52,24 +53,25 @@ export function SeoHead({
     setMetaTag('meta[name="twitter:title"]', 'name', 'twitter:title', title);
     setMetaTag('meta[name="twitter:description"]', 'name', 'twitter:description', description);
 
+    const rawPath = path ?? (typeof window !== 'undefined' ? window.location.pathname : '/');
+    const normalizedPath = rawPath === '/' ? '/' : rawPath.replace(/\/+$/, '');
+    const canonicalUrl = `${SITE_URL}${normalizedPath}`;
+    const absoluteImage = image.startsWith('http') ? image : `${SITE_URL}${image}`;
+
+    setMetaTag('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
+    setMetaTag('meta[property="og:image"]', 'property', 'og:image', absoluteImage);
+    setMetaTag('meta[name="twitter:image"]', 'name', 'twitter:image', absoluteImage);
+
+    let canonicalLink = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute('href', canonicalUrl);
+
     if (typeof window !== 'undefined') {
-      const origin = window.location.origin;
       const currentPath = `${window.location.pathname}${window.location.search}`;
-      const canonicalUrl = `${origin}${path ?? window.location.pathname}`;
-      const absoluteImage = image.startsWith('http') ? image : `${origin}${image}`;
-
-      setMetaTag('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
-      setMetaTag('meta[property="og:image"]', 'property', 'og:image', absoluteImage);
-      setMetaTag('meta[name="twitter:image"]', 'name', 'twitter:image', absoluteImage);
-
-      let canonicalLink = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-      if (!canonicalLink) {
-        canonicalLink = document.createElement('link');
-        canonicalLink.setAttribute('rel', 'canonical');
-        document.head.appendChild(canonicalLink);
-      }
-      canonicalLink.setAttribute('href', canonicalUrl);
-
       if (currentPath !== lastTrackedPath) {
         lastTrackedPath = currentPath;
         if (typeof window.gtag === 'function') {

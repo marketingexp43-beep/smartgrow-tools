@@ -2,7 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ChevronRight } from 'lucide-react';
 import { getArticleBySlug, ARTICLES } from '../data/articles';
 import { TOOLS } from '../data/tools';
-import { SeoHead } from '../components/SeoHead';
+import { SeoHead, SITE_URL } from '../components/SeoHead';
 import { SafeImage } from '../components/SafeImage';
 
 export function ArticleDetailPage() {
@@ -38,7 +38,7 @@ export function ArticleDetailPage() {
   const relatedTools = TOOLS.filter((t) => article.relatedToolSlugs.includes(t.slug));
   const moreArticles = ARTICLES.filter((a) => a.slug !== article.slug).slice(0, 2);
 
-  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://smartgrowtools.com';
+  const origin = SITE_URL;
   const coverAbsolute = article.coverImage
     ? `${origin}${article.coverImage}`
     : `${origin}/src/assets/images/hero_marketing_workspace_1794855472737.webp`;

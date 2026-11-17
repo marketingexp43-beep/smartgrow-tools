@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { CATEGORIES, CategoryId, getToolsByCategory } from '../data/tools';
 import { ARTICLES } from '../data/articles';
-import { SeoHead } from '../components/SeoHead';
+import { SeoHead, SITE_URL } from '../components/SeoHead';
 
 interface CategoryPageProps {
   categoryId: CategoryId;
@@ -15,7 +15,7 @@ export function CategoryPage({ categoryId }: CategoryPageProps) {
     a.relatedToolSlugs.some((slug) => tools.some((t) => t.slug === slug))
   );
 
-  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://smartgrowtools.com';
+  const origin = SITE_URL;
 
   const structuredData = [
     {

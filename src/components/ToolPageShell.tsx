@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { CATEGORIES, ToolDefinition, getToolsByCategory } from '../data/tools';
-import { SeoHead } from './SeoHead';
+import { SeoHead, SITE_URL } from './SeoHead';
 
 interface ToolPageShellProps {
   tool: ToolDefinition;
@@ -13,7 +13,7 @@ export function ToolPageShell({ tool, children }: ToolPageShellProps) {
   const category = CATEGORIES.find((c) => c.id === tool.categoryId);
   const siblingTools = getToolsByCategory(tool.categoryId).filter((t) => t.id !== tool.id);
 
-  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://smartgrowtools.com';
+  const origin = SITE_URL;
 
   const structuredData = [
     {

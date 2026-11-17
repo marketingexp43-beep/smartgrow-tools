@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Search } from 'lucide-react';
 import { CATEGORIES, CategoryId, TOOLS } from '../data/tools';
-import { SeoHead } from '../components/SeoHead';
+import { SeoHead, SITE_URL } from '../components/SeoHead';
 
 export function AllToolsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -33,7 +33,7 @@ export function AllToolsPage() {
     }
   };
 
-  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://smartgrowtools.com';
+  const origin = SITE_URL;
 
   const structuredData = {
     '@context': 'https://schema.org',
