@@ -1,9 +1,36 @@
+import { Fragment, ReactNode } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ChevronRight } from 'lucide-react';
 import { getArticleBySlug, ARTICLES } from '../data/articles';
 import { TOOLS } from '../data/tools';
 import { SeoHead, SITE_URL } from '../components/SeoHead';
 import { SafeImage } from '../components/SafeImage';
+
+const TOOL_LINK_REGEX = new RegExp(
+  `(${TOOLS.map((t) => t.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`,
+  'g'
+);
+
+function renderTextWithToolLinks(text: string): ReactNode {
+  const parts = text.split(TOOL_LINK_REGEX);
+  if (parts.length === 1) return text;
+
+  return parts.map((part, index) => {
+    const matchedTool = TOOLS.find((t) => t.name === part);
+    if (!matchedTool) {
+      return <Fragment key={index}>{part}</Fragment>;
+    }
+    return (
+      <Link
+        key={`${matchedTool.slug}-${index}`}
+        to={matchedTool.path}
+        className="text-blue-700 font-medium hover:underline"
+      >
+        {part}
+      </Link>
+    );
+  });
+}
 
 export function ArticleDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -79,6 +106,22 @@ export function ArticleDetailPage() {
         { '@type': 'ListItem', position: 3, name: article.title, item: `${origin}${article.path}` },
       ],
     },
+    ...(article.faqs && article.faqs.length > 0
+      ? [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: article.faqs.map((faq) => ({
+              '@type': 'Question',
+              name: faq.question,
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: faq.answer,
+              },
+            })),
+          },
+        ]
+      : []),
   ];
 
   return (
@@ -159,7 +202,7 @@ export function ArticleDetailPage() {
                   </h2>
                   <div className="space-y-4 text-base text-slate-700 leading-relaxed">
                     {section.paragraphs.map((para) => (
-                      <p key={para}>{para}</p>
+                      <p key={para}>{renderTextWithToolLinks(para)}</p>
                     ))}
                   </div>
                   {section.bullets && (
@@ -170,13 +213,65 @@ export function ArticleDetailPage() {
                             className="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-2.5"
                             aria-hidden="true"
                           />
-                          <span>{bullet}</span>
+                          <span>{renderTextWithToolLinks(bullet)}</span>
                         </li>
                       ))}
                     </ul>
                   )}
+                  {section.steps && (
+                    <ol className="list-none pl-0 mt-4 space-y-3 text-sm sm:text-base text-slate-700 leading-relaxed [counter-reset:step]">
+                      {section.steps.map((step) => (
+                        <li
+                          key={step}
+                          className="flex items-start gap-3 [counter-increment:step] before:content-[counter(step)] before:font-mono before:text-xs before:font-semibold before:text-blue-700 before:bg-blue-50 before:border before:border-blue-100 before:rounded-md before:w-6 before:h-6 before:flex before:items-center before:justify-center before:shrink-0 before:mt-0.5 before:tabular-nums"
+                        >
+                          <span>{renderTextWithToolLinks(step)}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  )}
+                  {section.examples && (
+                    <div className="mt-4 space-y-3">
+                      {section.examples.map((example) => (
+                        <div
+                          key={example.label}
+                          className="rounded-xl border border-slate-200 bg-slate-50/60 p-4"
+                        >
+                          <div className="text-xs font-semibold text-purple-700 mb-1.5">
+                            {example.label}
+                          </div>
+                          <p className="text-sm sm:text-base font-medium text-slate-900 leading-snug">
+                            {example.copy}
+                          </p>
+                          <p className="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                            {example.note}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </section>
               ))}
+
+              {article.faqs && article.faqs.length > 0 && (
+                <section className="pt-2">
+                  <h2 className="font-display text-xl sm:text-2xl font-bold text-slate-900 mb-4">
+                    Frequently Asked Questions
+                  </h2>
+                  <div className="divide-y divide-slate-200 border-t border-b border-slate-200">
+                    {article.faqs.map((faq) => (
+                      <div key={faq.question} className="py-4">
+                        <h3 className="text-sm sm:text-base font-semibold text-slate-900">
+                          {faq.question}
+                        </h3>
+                        <p className="mt-1.5 text-sm sm:text-base text-slate-600 leading-relaxed">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
             </div>
 
             <div className="mt-10 pt-6 border-t border-slate-200">

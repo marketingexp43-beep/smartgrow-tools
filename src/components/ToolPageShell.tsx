@@ -139,12 +139,12 @@ export function ToolPageShell({ tool, children }: ToolPageShellProps) {
               <h2 className="font-display text-xl font-bold text-slate-900 mb-4">
                 How to Use the {tool.name}
               </h2>
-              <ol className="space-y-3 text-sm text-slate-600 leading-relaxed">
-                {tool.howItWorks.map((step, index) => (
-                  <li key={step} className="flex items-start gap-3">
-                    <span className="font-mono text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 rounded-md w-6 h-6 flex items-center justify-center shrink-0 mt-0.5 tabular-nums">
-                      {index + 1}
-                    </span>
+              <ol className="list-none pl-0 space-y-3 text-sm text-slate-600 leading-relaxed [counter-reset:tool-step]">
+                {tool.howItWorks.map((step) => (
+                  <li
+                    key={step}
+                    className="flex items-start gap-3 [counter-increment:tool-step] before:content-[counter(tool-step)] before:font-mono before:text-xs before:font-semibold before:text-blue-700 before:bg-blue-50 before:border before:border-blue-100 before:rounded-md before:w-6 before:h-6 before:flex before:items-center before:justify-center before:shrink-0 before:mt-0.5 before:tabular-nums"
+                  >
                     <span>{step}</span>
                   </li>
                 ))}
