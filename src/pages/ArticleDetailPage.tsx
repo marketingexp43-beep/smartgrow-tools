@@ -183,6 +183,7 @@ export function ArticleDetailPage() {
             {article.coverImage && (
               <div className="aspect-[4/3] rounded-xl overflow-hidden border border-slate-200 mb-8 bg-slate-50">
                 <SafeImage
+                  key={article.coverImage}
                   src={article.coverImage}
                   alt={article.coverAlt || article.title}
                   fallbackLabel={article.category}
@@ -248,6 +249,44 @@ export function ArticleDetailPage() {
                           </p>
                         </div>
                       ))}
+                    </div>
+                  )}
+                  {section.table && (
+                    <div className="mt-4 overflow-x-auto rounded-xl border border-slate-200 bg-white">
+                      <table
+                        aria-label={section.table.caption}
+                        className="w-full text-left border-collapse text-xs sm:text-sm"
+                      >
+                        <thead>
+                          <tr className="border-b border-slate-200 bg-slate-50/80 text-xs font-semibold text-slate-700">
+                            {section.table.headers.map((header) => (
+                              <th key={header} scope="col" className="py-3 px-4 whitespace-nowrap">
+                                {header}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-200 text-slate-700">
+                          {section.table.rows.map((row, rowIndex) => (
+                            <tr key={rowIndex} className="hover:bg-slate-50/60 transition-colors">
+                              {row.map((cell, cellIndex) => (
+                                <td
+                                  key={`${rowIndex}-${cellIndex}`}
+                                  className={`py-3 px-4 align-top leading-relaxed ${
+                                    cellIndex === 0
+                                      ? 'font-medium text-slate-900'
+                                      : cellIndex === row.length - 1
+                                        ? 'font-mono text-xs text-blue-700 whitespace-nowrap'
+                                        : 'text-slate-600'
+                                  }`}
+                                >
+                                  {cell}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                   )}
                 </section>

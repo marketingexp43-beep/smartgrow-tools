@@ -9,12 +9,19 @@ export interface ArticleFaq {
   answer: string;
 }
 
+export interface ArticleTable {
+  caption?: string;
+  headers: string[];
+  rows: string[][];
+}
+
 export interface ArticleSection {
   heading: string;
   paragraphs: string[];
   bullets?: string[];
   steps?: string[];
   examples?: ArticleExample[];
+  table?: ArticleTable;
 }
 
 export interface ArticleDefinition {
@@ -232,11 +239,11 @@ export const ARTICLES: ArticleDefinition[] = [
     title: 'Keyword Research Fundamentals: Mapping Search Intent Without Guesswork',
     category: 'Keyword Strategy',
     publishedDate: 'November 2026',
-    isoDate: '2026-11-16',
-    readTime: '6 min read',
+    isoDate: '2026-11-18',
+    readTime: '10 min read',
     author: 'SmartGrow Editorial Team',
     excerpt:
-      'How to classify informational, commercial, comparison, and transactional modifiers so every page serves one clear user goal.',
+      'A practical beginner-friendly guide to finding seed keywords, classifying the four search intent categories, clustering long-tail queries, avoiding cannibalization, and mapping every keyword to the right page format.',
     seoTitle: 'Keyword Research & Search Intent Guide | SmartGrow Tools',
     seoDescription:
       'Understand the four primary search intent categories and learn how to group long-tail keyword modifiers into a clean site architecture.',
@@ -245,29 +252,227 @@ export const ARTICLES: ArticleDefinition[] = [
     relatedToolSlugs: ['keyword-generator', 'word-counter', 'meta-title-generator'],
     sections: [
       {
-        heading: 'Start With Intent Before Volume',
+        heading: 'Why Search Intent Comes Before Everything Else',
         paragraphs: [
-          'A high search volume number means little if the visitor wants a quick definition while your page is trying to sell enterprise software. Before drafting content, classify the modifier attached to the seed keyword.',
-          'Most search queries fall into four practical buckets: informational learning, commercial research, direct comparison, and transactional action.',
+          'Effective keyword research is not about collecting thousands of disconnected search terms in a spreadsheet. It is about understanding why someone typed a specific phrase into a search engine and matching that expectation with the right type of page.',
+          'A broad keyword with impressive estimated search demand brings little value if your page format mismatches what the visitor actually wants. If someone searches for a quick calculator or downloadable template and lands on a 2,500-word essay that buries the resource, they leave within seconds. Mapping search intent first keeps your content calendar focused on pages people genuinely want to read or use.',
         ],
       },
       {
-        heading: 'The Four Practical Intent Buckets',
+        heading: 'The Four Search Intent Categories Explained (With Examples)',
         paragraphs: [
-          'Organizing your keyword list by intent prevents keyword cannibalization—where two pages on your own site compete for the exact same query.',
+          'Most search queries fall into four practical intent categories. Recognizing the modifier words attached to a topic—such as "how to", "best", "vs", or "calculator"—helps you predict what format search engines reward and what visitors expect to see immediately upon landing.',
+        ],
+        examples: [
+          {
+            label: '1. Informational Intent — Learning & Problem Solving',
+            copy: 'how to write meta descriptions · what is cost per click · how does keyword density work · email marketing checklist for beginners · how to set up Google Analytics 4 · why Google rewrites title tags',
+            note: 'Goal: The searcher wants clear answers, step-by-step instructions, definitions, or troubleshooting advice rather than a sales pitch. Best page formats: in-depth tutorials, glossaries, FAQ guides, and educational walkthroughs.',
+          },
+          {
+            label: '2. Commercial Investigation — Evaluating Options & Categories',
+            copy: 'best free seo tools for bloggers · top project management software for freelancers · ergonomic office chairs for lower back support · email marketing platforms for small ecommerce · affordable static site hosting providers · best word counter extensions',
+            note: 'Goal: The searcher knows they need a solution within a category and is narrowing down choices based on features, pricing tiers, or use cases. Best page formats: structured buyer guides, category roundups, feature breakdowns, and methodology reviews.',
+          },
+          {
+            label: '3. Comparison Intent — Shortlisted Side-by-Side Trade-Offs',
+            copy: 'cloudflare pages vs netlify · ahrefs vs semrush for small agencies · notion vs obsidian for knowledge bases · shopify vs woocommerce transaction fees · mailchimp alternatives for newsletters · google docs vs microsoft word readability check',
+            note: 'Goal: The searcher has narrowed down to two or three specific contenders and wants an honest breakdown of differences before committing. Best page formats: side-by-side comparison tables, pros-and-cons analyses, and migration guides.',
+          },
+          {
+            label: '4. Transactional Intent — Ready to Act, Use, or Acquire',
+            copy: 'free meta title generator online · cpc calculator for google ads · downloadable content calendar template csv · instagram bio character counter · buy ergonomic mesh desk chair online · sign up for cloudflare pages free tier',
+            note: 'Goal: The searcher wants to complete an immediate task—open an interactive utility, download a spreadsheet, request a quote, or purchase a product. Best page formats: working tool workspaces, product pages, pricing pages, and direct template downloads.',
+          },
+        ],
+      },
+      {
+        heading: 'How Beginners Can Find Strong Seed Keywords',
+        paragraphs: [
+          'Seed keywords are the short, foundational one- to three-word topics that describe your core subject area—such as "email marketing", "running shoes", "meta tags", or "invoice template". You do not need expensive enterprise software to build an accurate starting seed list:',
         ],
         bullets: [
-          'Informational ("how to", "what is", "checklist"): Best served by tutorials, definitions, and structured guides.',
-          'Commercial Investigation ("best", "top", "examples"): Best served by curated roundups, methodology breakdowns, and category pages.',
-          'Comparison ("vs", "alternatives", "review"): Best served by transparent side-by-side tables evaluating trade-offs.',
-          'Transactional ("calculator", "template", "pricing", "tool"): Best served by interactive utilities, product pages, or downloadable assets.',
+          'Listen to real audience questions: Support emails, sales calls, forum threads, and social comments reveal the exact everyday phrasing people use before they ever learn industry jargon.',
+          'Check Google Autocomplete and "People Also Ask": Type a broad topic into search and note the suggested completions and follow-up questions that appear directly in live results.',
+          'Review competitor site navigation: Look at the top-level category labels, footer links, and resource hubs on established sites in your niche to spot core topics you have not mapped yet.',
+          'Inspect existing impressions in Google Search Console: Even a small, newly launched site quickly accumulates real query impressions—look for unexpected phrasing visitors already used to find your pages.',
+          'Expand topics with SmartGrow Keyword Generator: Enter any seed phrase into the Keyword Generator to generate structured informational questions, commercial modifiers, comparison phrases, and transactional variations in seconds.',
         ],
       },
       {
-        heading: 'Validating Seed Modifiers',
+        heading: 'Understanding Long-Tail Keywords With Practical Examples',
         paragraphs: [
-          'Once you generate a structured list of long-tail variations, inspect the top search results manually for your highest-priority terms. Look at what page formats already appear—if every result is an interactive calculator rather than a blog post, build the tool.',
+          'Long-tail keywords are longer, more specific multi-word search phrases that reflect a narrower user situation. While individual long-tail phrases generally attract fewer monthly searches than broad one-word head terms, they carry clearer context so it is easier to tell what the searcher actually expects.',
+          'Specific phrasing does not automatically guarantee low competition or high conversions—some multi-word commercial queries are fiercely competitive, and long-tail informational questions rarely convert like transactional product searches. Competition still depends on the strength of the pages currently ranking, and conversion depends on search intent and how well your page solves the user’s problem.',
+          'Compare the difference in clarity across these real-world progressions:',
         ],
+        bullets: [
+          'Broad head term: "running shoes" (ambiguous—could mean history, brands, sizing, or shopping) → Long-tail: "cushioned stability running shoes for flat feet" (clear commercial product intent).',
+          'Broad head term: "keyword research" (extremely broad and competitive) → Long-tail: "how to group keywords by search intent for a blog" (clear informational tutorial intent).',
+          'Broad head term: "cpc calculator" (core tool query) → Long-tail: "break even cpc calculator with conversion rate and order value" (specific feature-driven transactional query).',
+          'Broad head term: "instagram bio" (vague) → Long-tail: "instagram bio ideas for handmade jewelry small business" (specific audience and format intent).',
+        ],
+      },
+      {
+        heading: 'Search Volume, Keyword Difficulty, and Search Intent Compared',
+        paragraphs: [
+          'Beginners often evaluate keyword opportunities using only estimated search volume, or avoid useful topics simply because a third-party score looks intimidating. Understanding what each concept actually measures keeps your prioritization grounded:',
+        ],
+        bullets: [
+          'Search Volume: An estimate of average monthly searches for a query, usually modeled from clickstream panels and ad planner data. Treat volume as a directional comparison between topics rather than an exact prediction—many specific long-tail queries show low estimated volume in tools yet still attract relevant visitors when grouped around a clear topic.',
+          'Keyword Difficulty: A third-party estimate of how competitive the current top-ranking pages are, typically based on domain authority, referring links, brand strength, and topical depth. It is not an official Google metric, and scores vary across tools, so always inspect the actual live search results manually.',
+          'Search Intent: The overarching filter that decides whether your page deserves to rank or engage visitors at all. A low-difficulty, moderate-volume keyword still falls short if you publish an editorial blog post when every ranking result on page one is an interactive calculator or product category.',
+        ],
+      },
+      {
+        heading: 'Practical Keyword Research Mapping Table',
+        paragraphs: [
+          'Mapping your selected keywords into a structured planning sheet ensures every target topic receives an appropriate page format, clear scope, and clean URL structure before writing begins:',
+        ],
+        table: {
+          caption: 'Sample keyword-to-page mapping across all four search intent categories',
+          headers: [
+            'Target Keyword',
+            'Search Intent',
+            'Scope',
+            'Recommended Page Format',
+            'Suggested URL Slug',
+          ],
+          rows: [
+            [
+              'how to write seo meta titles',
+              'Informational',
+              'Long-tail',
+              'Step-by-step guide with examples',
+              '/articles/how-to-write-seo-meta-titles-and-descriptions',
+            ],
+            [
+              'what is click through rate in ads',
+              'Informational',
+              'Long-tail',
+              'Educational guide + formula breakdown',
+              '/articles/understanding-cpc-ctr-and-conversion-economics',
+            ],
+            [
+              'best free seo tools for beginners',
+              'Commercial Investigation',
+              'Long-tail',
+              'Categorized tool directory / roundup',
+              '/seo-tools',
+            ],
+            [
+              'top character limit checkers for social media',
+              'Commercial Investigation',
+              'Long-tail',
+              'Category comparison + feature overview',
+              '/content-writing-tools',
+            ],
+            [
+              'cloudflare pages vs netlify for static sites',
+              'Comparison',
+              'Long-tail',
+              'Side-by-side comparison table',
+              '/articles/cloudflare-pages-vs-netlify',
+            ],
+            [
+              'meta title generator free',
+              'Transactional',
+              'Core utility',
+              'Interactive SERP preview tool',
+              '/tools/meta-title-generator',
+            ],
+            [
+              'cpc and roas calculator online',
+              'Transactional',
+              'Long-tail',
+              'Interactive paid media calculator',
+              '/tools/cpc-calculator',
+            ],
+            [
+              'word count and keyword density checker',
+              'Transactional',
+              'Long-tail',
+              'Real-time text analyzer workspace',
+              '/tools/word-counter',
+            ],
+          ],
+        },
+      },
+      {
+        heading: 'Step-by-Step Keyword Research Process',
+        paragraphs: [
+          'You can repeat this practical six-step workflow whenever planning new tools, landing pages, or educational articles:',
+        ],
+        steps: [
+          'Define 3 to 5 core topic pillars: List the primary problems your website solves for visitors so every keyword idea ties directly back to your actual expertise or utilities.',
+          'Generate structured modifier ideas: Run each seed phrase through the SmartGrow Keyword Generator to uncover informational questions, commercial comparisons, and transactional tool/template searches.',
+          'Verify intent on the live search results page: Search your top candidates and inspect the top 5 results—note whether Google displays interactive tools, comparison tables, category pages, or long-form tutorials.',
+          'Cluster matching-intent phrases into one page plan: Group close variations (such as "word counter", "online word count checker", and "reading time counter") onto a single comprehensive URL instead of building redundant thin pages.',
+          'Draft clear titles and check topic coverage: Use the Meta Title Generator to frame a front-loaded page title around the primary topic, and check natural phrasing and keyword balance inside the Word Counter before publishing.',
+          'Monitor real queries and refine: After Google indexes the page, review Google Search Console queries to see which related long-tail phrases earn impressions and expand your subheadings or FAQs where readers have unanswered questions.',
+        ],
+      },
+      {
+        heading: 'What Keyword Cannibalization Is (And How to Avoid It)',
+        paragraphs: [
+          'Keyword cannibalization happens when two or more pages on the same website target the exact same search intent and primary query. Instead of doubling your chances of ranking, splitting content across overlapping URLs dilutes internal link signals, confuses crawlers about which page is authoritative, and often leaves both pages ranking below a single unified resource.',
+          'Notice that cannibalization is about overlapping search intent—not merely mentioning the same topic word across your site. An interactive Word Counter tool page (transactional intent) and an editorial guide on readability and keyword density (informational intent) complement each other cleanly because they serve distinct user goals and link back and forth. Problems arise when you publish two separate blog posts that both try to answer "how to do keyword research for beginners".',
+          'To prevent and resolve cannibalization, maintain one central keyword map assigning a unique primary intent to every URL, consolidate overlapping posts into one stronger guide with a 301 redirect if duplicates already exist, and use clear internal link anchor text pointing toward the single canonical resource for each query.',
+        ],
+      },
+      {
+        heading: 'Common Keyword Research Mistakes to Avoid',
+        paragraphs: [
+          'Avoiding a few predictable pitfalls saves weeks of writing content that struggles to attract relevant visitors:',
+        ],
+        bullets: [
+          'Chasing broad head terms solely for high volume: Single-word terms often carry vague, mixed intent and heavy competition from major brands, whereas specific multi-word phrases make it far easier to align your page with what the visitor actually expects.',
+          'Skipping live SERP verification: Guessing search intent from the wording alone leads to building blog posts for queries where searchers actually expect calculators, videos, or shopping grids.',
+          'Creating separate pages for minor wording variations: Modern search engines understand close synonyms and word order; publishing separate pages for "free cpc calculator" and "online cpc calculator" creates unnecessary overlap.',
+          'Relying blindly on third-party difficulty scores: Always check who ranks in the top results—sometimes a medium difficulty score hides deeply established forums or official documentation, while another keyword looks competitive only because existing results are outdated.',
+          'Stuffing target phrases unnaturally into headings and copy: Repeating the exact keyword awkwardly harms readability; write clearly for humans first and verify natural topic coverage with the Word Counter.',
+        ],
+      },
+      {
+        heading: 'Practical Keyword Research Checklist',
+        paragraphs: [
+          'Before writing or commissioning a new page, run through these quick checks:',
+        ],
+        bullets: [
+          'Every planned page maps to one primary search intent category (Informational, Commercial, Comparison, or Transactional).',
+          'Live search results confirm that your chosen page format matches what searchers expect for the main query.',
+          'Close synonyms and supporting long-tail questions are grouped into one comprehensive outline rather than split across duplicate URLs.',
+          'No existing page on your site already covers the exact same topic and search intent.',
+          'Your H1 heading, URL slug, and draft title tested in the Meta Title Generator communicate the primary topic clearly without keyword stuffing.',
+          'Internal links are planned between the new page and related tools or supporting guides on your site.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'How many keywords should I target on a single page?',
+        answer:
+          'Focus on one primary keyword (representing the main search intent of the page) supported naturally by a tight cluster of closely related long-tail variations and sub-questions. A well-structured page routinely ranks for dozens or hundreds of phrasing variations automatically when it covers the main topic thoroughly.',
+      },
+      {
+        question: 'Are low-volume long-tail keywords still worth targeting?',
+        answer:
+          'Often yes, depending on the topic and live competition. Third-party search volume tools frequently underreport or show "0–10" for specific multi-word questions, even when people search variations of them regularly. Long-tail phrasing does not guarantee easy rankings or conversions on its own, so always inspect the live search results—but covering clear, specific subtopics inside a thorough guide or tool page is frequently more practical for newer sites than targeting broad single-word terms.',
+      },
+      {
+        question: 'How accurate are search volume and keyword difficulty scores in SEO tools?',
+        answer:
+          'Treat both metrics as directional estimates rather than exact measurements. Volume estimates rely on modeled historical samples that fluctuate across tools, and difficulty scores mostly approximate link profiles rather than content quality or intent alignment. Always verify real demand in Google Search Console once published and inspect the live search results manually before committing.',
+      },
+      {
+        question: 'Can a blog article and a tool page target the same topic without cannibalization?',
+        answer:
+          'Yes, provided their search intent differs clearly. For example, an interactive utility page satisfies transactional users looking to calculate CPC immediately, while an educational guide serves informational readers learning how CPC, CTR, and ROAS relate. Linking them together helps both users and search engines understand each page’s distinct purpose.',
+      },
+      {
+        question: 'How do I classify a keyword when its search intent looks ambiguous?',
+        answer:
+          'Search the exact phrase in a private browser window and examine the top five to ten results. If most results are definitions and tutorials, intent is informational; if they are product roundups, intent is commercial; if they are interactive tools or store pages, intent is transactional. When results show a mix of formats, choose the angle that aligns best with what your website actually offers.',
       },
     ],
   },
