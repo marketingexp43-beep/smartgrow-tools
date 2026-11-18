@@ -6,24 +6,32 @@ import { TOOLS } from '../data/tools';
 import { SeoHead, SITE_URL } from '../components/SeoHead';
 import { SafeImage } from '../components/SafeImage';
 
-const TOOL_LINK_REGEX = new RegExp(
-  `(${TOOLS.map((t) => t.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`,
+const ESCAPE_REGEX = /[.*+?^${}()|[\]\\]/g;
+const LINKABLE_TERMS = [
+  ...TOOLS.map((t) => ({ label: t.name, path: t.path })),
+  ...ARTICLES.map((a) => ({ label: a.title, path: a.path })),
+].sort((a, b) => b.label.length - a.label.length);
+
+const INLINE_LINK_REGEX = new RegExp(
+  `(${LINKABLE_TERMS.map((item) => item.label.replace(ESCAPE_REGEX, '\\$&')).join('|')})`,
   'g'
 );
 
-function renderTextWithToolLinks(text: string): ReactNode {
-  const parts = text.split(TOOL_LINK_REGEX);
+function renderTextWithInternalLinks(text: string, currentArticlePath?: string): ReactNode {
+  const parts = text.split(INLINE_LINK_REGEX);
   if (parts.length === 1) return text;
 
   return parts.map((part, index) => {
-    const matchedTool = TOOLS.find((t) => t.name === part);
-    if (!matchedTool) {
+    const matched = LINKABLE_TERMS.find(
+      (item) => item.label === part && item.path !== currentArticlePath
+    );
+    if (!matched) {
       return <Fragment key={index}>{part}</Fragment>;
     }
     return (
       <Link
-        key={`${matchedTool.slug}-${index}`}
-        to={matchedTool.path}
+        key={`${matched.path}-${index}`}
+        to={matched.path}
         className="text-blue-700 font-medium hover:underline"
       >
         {part}
@@ -203,7 +211,7 @@ export function ArticleDetailPage() {
                   </h2>
                   <div className="space-y-4 text-base text-slate-700 leading-relaxed">
                     {section.paragraphs.map((para) => (
-                      <p key={para}>{renderTextWithToolLinks(para)}</p>
+                      <p key={para}>{renderTextWithInternalLinks(para, article.path)}</p>
                     ))}
                   </div>
                   {section.bullets && (
@@ -214,7 +222,7 @@ export function ArticleDetailPage() {
                             className="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-2.5"
                             aria-hidden="true"
                           />
-                          <span>{renderTextWithToolLinks(bullet)}</span>
+                          <span>{renderTextWithInternalLinks(bullet, article.path)}</span>
                         </li>
                       ))}
                     </ul>
@@ -226,7 +234,7 @@ export function ArticleDetailPage() {
                           key={step}
                           className="flex items-start gap-3 [counter-increment:step] before:content-[counter(step)] before:font-mono before:text-xs before:font-semibold before:text-blue-700 before:bg-blue-50 before:border before:border-blue-100 before:rounded-md before:w-6 before:h-6 before:flex before:items-center before:justify-center before:shrink-0 before:mt-0.5 before:tabular-nums"
                         >
-                          <span>{renderTextWithToolLinks(step)}</span>
+                          <span>{renderTextWithInternalLinks(step, article.path)}</span>
                         </li>
                       ))}
                     </ol>

@@ -665,33 +665,154 @@ export const ARTICLES: ArticleDefinition[] = [
     title: 'Optimizing Social Profiles, Hashtags, and Video Titles for Discovery',
     category: 'Social Media',
     publishedDate: 'November 2026',
-    isoDate: '2026-11-16',
-    readTime: '4 min read',
+    isoDate: '2026-11-18',
+    readTime: '8 min read',
     author: 'SmartGrow Editorial Team',
     excerpt:
-      'How mobile truncation limits shape Instagram bios, YouTube video titles, and cross-platform hashtag selection.',
+      'A practical guide to writing concise 150-character Instagram bios, researching readable CamelCase hashtags, and crafting mobile-safe YouTube video titles with before-and-after examples and an actionable checklist.',
     seoTitle: 'Social Bios, Hashtags & Video Titles | SmartGrow Tools',
     seoDescription:
-      'Practical guidelines for formatting 150-character Instagram bios, CamelCase hashtags, and mobile-safe YouTube video titles.',
+      'Learn how to optimize 150-character Instagram bios, readable CamelCase hashtags, and mobile-safe YouTube video titles with before-and-after examples.',
+    coverImage: '/src/assets/images/article_social_discovery_1795027607056.webp',
+    coverAlt:
+      'Minimalist illustration of a smartphone social profile card, geometric hashtag badges, and a clean video player frame',
     relatedToolSlugs: ['instagram-bio-generator', 'hashtag-generator', 'youtube-title-generator'],
     sections: [
       {
-        heading: 'Designing for Narrow Mobile Viewports',
+        heading: 'Why Mobile Discovery Rewards Clarity Over Cleverness',
         paragraphs: [
-          'Most social discovery happens on phones where vertical space is scarce. Instagram caps bios at 150 characters, and YouTube home feeds routinely clip video titles past 60 characters.',
-          'Editing your copy inside a character-aware preview before publishing eliminates awkward cut-offs and hidden calls to action.',
+          'Most social discovery happens on narrow smartphone screens where people scroll fast and decide within seconds whether a profile, post, or video is worth opening. Social interfaces compress your pitch into tight character caps and truncate anything past the first couple of lines.',
+          'Effective social optimization follows the same clarity-first habits covered in How to Write SEO Meta Titles and Meta Descriptions That Earn Clicks: state who the content helps, highlight the real outcome, and place your core words at the start before mobile feeds clip them off.',
+          'Whether updating an Instagram bio, selecting hashtags, or naming a YouTube video, designing around mobile limits and search intent helps both viewers and discovery systems understand what you publish.',
         ],
       },
       {
-        heading: 'Readable Hashtags and Profile Clarity',
+        heading: 'Instagram Bio Optimization (150 Characters That Work)',
         paragraphs: [
-          'Modern social algorithms rely heavily on on-screen text, spoken audio transcripts, and caption phrasing rather than giant blocks of generic hashtags. Treat hashtags as secondary topic labels.',
+          'Your Instagram header answers three questions immediately: what you do, who it helps, and what to do next. Two fields work together at the top: the Name field (separate from your @handle and searchable in Instagram profile search) and the 150-character Bio field.',
+          'Because Instagram enforces a strict 150-character limit—counting spaces, emojis, punctuation, and line breaks—filler buzzwords steal room from useful context. Profiles with four or five lines can also fold behind a "more" toggle on small phones, hiding bottom calls to action.',
+          'Use the Instagram Bio Generator alongside our Character Counter to structure three crisp lines: Line 1 states your specialty, Line 2 shares proof or publishing cadence, and Line 3 gives a direct CTA pointing to your link.',
+        ],
+        examples: [
+          {
+            label: 'Before vs. After — Independent Nutrition Coach (Instagram Bio)',
+            copy: 'Before: "Helping you live your best life ✨ Wellness enthusiast | Recipes & tips | DM for collabs" → After: "Registered Dietitian · High-Protein Meal Prep | Quick 20-min weeknight recipes for busy parents | Free 5-day grocery guide ↓"',
+            note: 'Replaces vague phrasing with credentials, concrete audience value (20-min weeknight recipes for busy parents), and a specific link CTA under 150 characters.',
+          },
+          {
+            label: 'Before vs. After — Ergonomic Workspace Store (Instagram Bio)',
+            copy: 'Before: "Your #1 destination for office gear. Quality guaranteed! Worldwide shipping available." → After: "Minimalist Home Office Gear | Standing desks, monitor arms & cable kits | Ships in 24h · Browse the desk setup catalog ↓"',
+            note: 'Swaps generic claims ("#1 destination") for searchable product categories and an actionable shipping and catalog detail.',
+          },
+          {
+            label: 'Before vs. After — Local Coffee Roaster (Instagram Bio)',
+            copy: 'Before: "Good vibes and great coffee daily ☕ Come say hi!" → After: "Small-Batch Specialty Roaster · Portland, OR | Single-origin beans roasted Tuesdays | Open 7am–4pm daily · Order beans ↓"',
+            note: 'Pairs product focus with city context, roasting cadence, and opening hours so local visitors know when to visit or order.',
+          },
+        ],
+      },
+      {
+        heading: 'Hashtag Research, Relevance, and Readability',
+        paragraphs: [
+          'Hashtags help describe and categorize your post so viewers browsing a subject can recognize what it covers, but they do not guarantee extra reach or distribution. Treat hashtags as accurate subject labels that support clear writing and helpful visuals rather than a shortcut for visibility.',
+          'Start hashtag research from the exact subject of your post instead of chasing unrelated trending tags. Use the Hashtag Generator to select focused candidates across broad category terms (#DigitalMarketing), specific topic labels (#TechnicalSEOAudit), and community descriptors (#MarketingTipsForFounders) that genuinely match your post.',
+          'On Instagram, posts and Reels allow up to 5 hashtags, making specificity essential—choose a maximum of 5 relevant hashtags rather than padding with filler. On other networks such as LinkedIn, X, and TikTok, recommendations vary by platform guidelines, post format, and audience, so keep tags selective and clearly tied to your topic. Always format multi-word tags in CamelCase (#ContentStrategy rather than #contentstrategy) so human readers and screen readers can parse every word cleanly.',
         ],
         bullets: [
-          'Format multi-word hashtags in CamelCase (#DigitalMarketing) for both readability and screen-reader accessibility.',
-          'State what you publish and who it is for in the first line of your Instagram bio.',
-          'Lead YouTube titles with the concrete outcome or subject before adding parenthetical context.',
+          'Exceeding limits or stuffing unrelated filler tags (#love, #instagood, #fyp): Adding off-topic tags dilutes relevance and attracts low-intent engagement instead of people genuinely interested in your subject.',
+          'Pasting identical hashtag blocks on every post: Reusing the same static list ignores what each post actually covers and makes captions feel templated.',
+          'Applying rigid one-size-fits-all hashtag counts across channels: Instagram supports up to 5 hashtags per post or Reel, while ideal usage on LinkedIn, X, and TikTok varies by platform rules and content style.',
+          'Writing long lowercase tags (#howtowritesocialmediabiosfaster): Difficult to scan visually and confusing for screen readers—stick to concise 2–4 word CamelCase tags.',
         ],
+      },
+      {
+        heading: 'YouTube Title Optimization: Search Intent Meets Click Clarity',
+        paragraphs: [
+          'A YouTube title serves viewers across both YouTube Search (matching specific queries) and Browse or Suggested feeds (helping viewers decide whether a video fits what they want alongside the thumbnail). Strong titles combine clear subject words with honest curiosity—applying the search-intent habits from Keyword Research Fundamentals: Mapping Search Intent Without Guesswork.',
+          'Although YouTube allows up to 100 characters in a video title, display length varies significantly by device, screen width, and feed layout. Treating roughly 55 to 65 characters as a practical writing guideline for your core subject and payoff—rather than a fixed platform cutoff—helps keep important context visible before ellipsis truncation.',
+          'Treat your title and thumbnail as complementary halves. If your thumbnail displays a short 3-word hook like "Zero Budget Setup," use the YouTube Title Generator to give full clarity ("How to Record Crisp Audio at Home Under $50") without duplicating the exact thumbnail text.',
+        ],
+        examples: [
+          {
+            label: 'Before vs. After — Tutorial / How-To Intent (YouTube Title)',
+            copy: 'Before: "My Complete Guide to Editing Faster in DaVinci Resolve Step by Step Tutorial 2026" (84 chars) → After: "Edit Videos 2x Faster in DaVinci Resolve (5 Keyboard Shortcuts)" (61 chars)',
+            note: 'Front-loads the software name and clear payoff inside practical guideline length, trimming filler words while specifying concrete scope.',
+          },
+          {
+            label: 'Before vs. After — Comparison / Commercial Intent (YouTube Title)',
+            copy: 'Before: "Which Microphone Should You Buy? Testing Three USB Mics For Creators" (70 chars) → After: "Best Budget USB Mic for YouTube: Shure vs. Rode vs. Fifine" (58 chars)',
+            note: 'Leads with buyer comparison intent and names all three models upfront so the core subject stays readable across layouts.',
+          },
+          {
+            label: 'Before vs. After — Problem-Solving / Diagnostic Intent (YouTube Title)',
+            copy: 'Before: "Why Nobody Is Clicking Your Website Links and How I Fixed My SEO Titles" (73 chars) → After: "Why Pages Get Impressions Without Clicks (And How to Fix Titles)" (64 chars)',
+            note: 'Matches the exact Search Console symptom viewers search for and pairs it with a clear takeaway without clickbait.',
+          },
+        ],
+      },
+      {
+        heading: 'Mobile Character Limits & Practical Display Guidelines',
+        paragraphs: [
+          'Understanding the difference between a platform’s hard character limit and practical front-loading guidelines helps keep key details visible across varying screen widths and layouts:',
+        ],
+        table: {
+          caption: 'Platform hard character limits vs. practical display guidelines across devices',
+          headers: [
+            'Platform Element',
+            'Hard Limit',
+            'Practical Writing Guideline',
+          ],
+          rows: [
+            ['Instagram Bio', '150 characters', 'Keep full bio under 150 chars; place core pitch in first 2 lines'],
+            ['Instagram Name Field', '30 characters', 'Use clear brand + 1–2 primary niche keywords'],
+            ['YouTube Video Title', '100 characters', 'Guideline: lead with core topic & payoff (~55–65 chars; varies by device/layout)'],
+            ['YouTube Description Preview', '5,000 characters', 'Summarize topic & primary link early (first ~120–140 chars)'],
+            ['LinkedIn Headline', '220 characters', 'Place role, specialty, and value near the beginning (~70–90 chars)'],
+            ['X (Twitter) Bio', '160 characters', 'Keep clear who/what/CTA concise within the 160-character limit'],
+          ],
+        },
+      },
+      {
+        heading: 'Step-by-Step Social & Video Discovery Checklist',
+        paragraphs: [
+          'Run through this practical seven-step workflow before updating your profile or publishing your next video or social post:',
+        ],
+        steps: [
+          'Optimize your searchable profile Name field: Add one or two concise specialty keywords beside your brand name (for example, "Maya Lin · SEO Writer") rather than repeating only your handle.',
+          'Draft a 3-line bio under 150 characters: Build variations in the Instagram Bio Generator placing who you help on Line 1, concrete proof or cadence on Line 2, and one clear link CTA on Line 3.',
+          'Verify truncation in a character-aware preview: Check final character counts and line breaks with the Character Counter so key phrases never wrap awkwardly on narrow phones.',
+          'Select up to 5 relevant hashtags on Instagram (or concise topic-matched tags elsewhere): Use the Hashtag Generator to pick accurate broad, niche, or community labels tied strictly to your post, formatted in CamelCase.',
+          'Write search-aligned, front-loaded YouTube titles: Draft clear video titles in the YouTube Title Generator, using ~55 to 65 characters as a practical guideline for your main topic and payoff since display width varies by device and layout.',
+          'Pair title and thumbnail cleanly: Confirm your title adds specific context missing from the thumbnail text, and review caption clarity using habits from Content Structure, Readability, and Natural Keyword Density.',
+          'Match the first 30 seconds and caption to the title promise: Deliver immediately on whatever the title or bio promised so visitors stay engaged instead of leaving early.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Do hashtags guarantee extra reach on Instagram, TikTok, or LinkedIn?',
+        answer:
+          'No. Hashtags help describe and categorize your content for topic browsing and search, but they do not guarantee extra reach or distribution. On Instagram—where posts and Reels allow up to 5 hashtags—selecting a maximum of 5 accurate, relevant tags supports clear captions and visuals rather than replacing them.',
+      },
+      {
+        question: 'Why do line breaks count toward Instagram’s 150-character bio limit?',
+        answer:
+          'Each line break (newline character) takes one character slot in Instagram’s database field, just like spaces and punctuation. Checking your exact text—including line breaks and emojis—inside the Instagram Bio Generator or Character Counter prevents save errors when pasting into Instagram.',
+      },
+      {
+        question: 'How long should a YouTube video title be to avoid awkward truncation?',
+        answer:
+          'YouTube allows up to 100 characters, and there is no single fixed cutoff because visible title length varies across devices, screen widths, and feed layouts. As a practical writing guideline, placing your main topic and viewer outcome within roughly the first 55 to 65 characters helps keep essential context readable.',
+      },
+      {
+        question: 'Should I put hashtags inside my YouTube video title?',
+        answer:
+          'Usually no. Adding hashtags inside a YouTube title uses up valuable early character space and distracts viewers scanning results. Placing a few relevant hashtags cleanly in your video description provides topic context without cluttering the title.',
+      },
+      {
+        question: 'How often should I update my social profile bio?',
+        answer:
+          'Review your bio quarterly or whenever your primary offer, lead magnet, or content focus changes. Updating Line 3 whenever you launch a new guide or tool keeps your link call to action fresh while keeping your core identity in Lines 1 and 2 consistent.',
       },
     ],
   },
@@ -723,6 +844,170 @@ export const ARTICLES: ArticleDefinition[] = [
           'There is no magic keyword density percentage required to rank. Instead, inspecting top word and two-word phrase frequencies serves as an editorial sanity check.',
           'If your primary phrase barely appears in a 1,200-word article, your subheadings may be off-topic. Conversely, if a single phrase repeats unnaturally in every paragraph, swapping in synonyms makes the prose far smoother to read.',
         ],
+      },
+    ],
+  },
+  {
+    slug: 'technical-seo-audit-step-by-step-guide',
+    path: '/articles/technical-seo-audit-step-by-step-guide',
+    title: 'Technical SEO Audit: A Step-by-Step Guide for Beginners',
+    category: 'Technical SEO',
+    publishedDate: 'November 2026',
+    isoDate: '2026-11-18',
+    readTime: '8 min read',
+    author: 'SmartGrow Editorial Team',
+    excerpt:
+      'A practical, beginner-friendly guide to auditing website crawling, indexing, HTTPS security, mobile usability, page speed, broken links, canonical tags, robots.txt, and XML sitemaps without guesswork.',
+    seoTitle: 'Technical SEO Audit: Step-by-Step Guide | SmartGrow Tools',
+    seoDescription:
+      'Follow a step-by-step technical SEO audit covering crawling, indexing, HTTPS, mobile speed, broken links, canonical tags, robots.txt, and XML sitemaps.',
+    coverImage: '/src/assets/images/article_technical_seo_audit_1795027254653.webp',
+    coverAlt:
+      'Minimalist illustration of a browser window connected to sitemap nodes, HTTPS shield, code inspection, and speed gauge',
+    relatedToolSlugs: [
+      'meta-title-generator',
+      'meta-description-generator',
+      'character-counter',
+      'word-counter',
+    ],
+    sections: [
+      {
+        heading: 'What Technical SEO Is (And Why It Comes First)',
+        paragraphs: [
+          'Technical SEO ensures search engines can reliably find, read, and store your web pages while giving human visitors a fast, secure experience. Even helpful, original content struggles to earn organic visibility if crawlers encounter server errors, accidentally blocked paths, or conflicting duplicate URLs.',
+          'Think of your site like a library: content is the books, while technical SEO covers clear entrances, accurate catalog cards, and working lighting. Fixing technical barriers never guarantees higher rankings—search placement still depends on relevance, helpfulness, and competition—but removing obstacles allows your pages to compete fairly.',
+          'Every search engine handles two foundational stages: crawling (following links and sitemaps to fetch HTML, CSS, and scripts) and indexing (evaluating page content and canonical signals before deciding whether and how to store the URL). A thorough audit verifies both stages.',
+        ],
+      },
+      {
+        heading: 'Crawling Controls: robots.txt and XML Sitemaps',
+        paragraphs: [
+          'Bots discover pages by following internal links and reading two root-level files: robots.txt and your XML sitemap.',
+          'Your robots.txt file (/robots.txt) tells crawlers which paths they may request. Crucially, robots.txt controls crawling—not indexing. If external sites link to a disallowed URL, search engines can still index the address without reading the page unless the URL returns a meta robots noindex tag or requires login.',
+          'An XML sitemap (/sitemap.xml) lists the canonical, indexable URLs you want crawlers to check. Keep sitemaps limited to live 200-status URLs—exclude 404 pages, redirects, and noindex URLs.',
+        ],
+        examples: [
+          {
+            label: 'Clean robots.txt Example (Allows Public Pages & Declares Sitemap)',
+            copy: 'User-agent: * | Allow: / | Disallow: /admin/ | Sitemap: https://smartgrow-tools.pages.dev/sitemap.xml',
+            note: 'Permits crawlers to read public pages, CSS, and JavaScript while keeping internal admin routes out of crawl queues.',
+          },
+          {
+            label: 'Valid XML Sitemap <url> Entry',
+            copy: '<url><loc>https://smartgrow-tools.pages.dev/seo-tools</loc><lastmod>2026-11-18</lastmod></url>',
+            note: 'Uses the exact canonical HTTPS URL and an accurate lastmod date without broken or redirected links.',
+          },
+          {
+            label: 'Meta Robots Directive for Crawled Non-Indexed Pages',
+            copy: '<meta name="robots" content="noindex, follow" />',
+            note: 'Add inside <head> on thank-you pages, internal search results, or thin utility URLs—and never block those pages in robots.txt.',
+          },
+        ],
+      },
+      {
+        heading: 'HTTPS Security, HTTP Status Codes, Redirects, and Broken Links',
+        paragraphs: [
+          'Browsers warn visitors on unencrypted HTTP pages, and HTTPS is a baseline expectation across Google Search. Confirm that a valid SSL/TLS certificate covers your entire domain and that all stylesheets, scripts, and images load over HTTPS without mixed-content browser warnings.',
+          'Next, consolidate host variations cleanly. Because http://example.com, https://example.com, and https://www.example.com can appear as distinct endpoints, pick one canonical host format and route all other variations via a single permanent 301 redirect rather than slow multi-hop redirect chains (A → B → C).',
+          'Checking HTTP status codes during a crawl reveals hidden friction: live pages should return 200 OK, moved pages should use a single 301 redirect rather than temporary 302 loops, retired URLs should return 404 Not Found or 410 Gone, and repeated 5xx server errors signal hosting instability. Scan internal menus, body links, and sitemaps to repair broken internal links immediately.',
+        ],
+      },
+      {
+        heading: 'Duplicate Content and Canonical Tags',
+        paragraphs: [
+          'Duplicate content occurs when identical or near-identical pages load across multiple URLs—commonly caused by trailing slashes (/guide vs. /guide/), uppercase paths, campaign tracking parameters (?utm_source=newsletter), print views, or product sorting filters.',
+          'A canonical tag (<link rel="canonical" href="https://smartgrow-tools.pages.dev/tools/word-counter" />) inside the HTML <head> tells crawlers which master URL represents the page. For example, if visitors share your guide via /articles/word-counter?utm_source=social, the canonical tag points cleanly back to the clean parameter-free URL so authority is not split.',
+          'Always place a self-referencing canonical tag on indexable pages using the exact preferred URL (matching HTTPS, host, and trailing slash convention). Remember that search engines treat rel="canonical" as a strong hint rather than a strict rule, so reinforce it with matching internal links and sitemap entries.',
+        ],
+      },
+      {
+        heading: 'Mobile-Friendliness and Page Speed Fundamentals',
+        paragraphs: [
+          'Google primarily crawls using a mobile smartphone agent (mobile-first indexing), so mobile rendering shapes how your site is evaluated. Test narrow phone viewports for a valid <meta name="viewport" content="width=device-width, initial-scale=1.0" /> tag, readable font sizes without zooming, comfortable tap spacing between buttons, and zero horizontal scrolling.',
+          'Page speed shapes visitor bounce rates and Core Web Vitals: Largest Contentful Paint (LCP, how quickly the main visible element renders), Interaction to Next Paint (INP, how snappily buttons respond to taps or clicks), and Cumulative Layout Shift (CLS, whether text or buttons jump unexpectedly while images load).',
+          'Focus on practical, high-impact fixes: convert large PNG or JPEG graphics into smaller WebP or AVIF files, declare explicit image width and height attributes to prevent layout jumps, split large JavaScript bundles so pages load only necessary code, and enable browser caching. Speed tools highlight concrete bottlenecks rather than guaranteeing automatic ranking gains—aim for crisp, responsive loads on standard mobile connections.',
+        ],
+      },
+      {
+        heading: 'Technical SEO Audit Quick-Reference Table',
+        paragraphs: [
+          'Use this table as a fast lookup while checking each layer of your site:',
+        ],
+        table: {
+          caption: 'Summary of technical SEO audit areas, checks, and fixes',
+          headers: [
+            'Audit Area',
+            'What to Check',
+            'Practical Fix',
+          ],
+          rows: [
+            ['Crawling & Robots', 'Stray Disallow rules blocking pages, CSS, or JS', 'Allow public assets in robots.txt and declare sitemap URL'],
+            ['Indexing', 'Missing pages or accidental noindex tags', 'Remove unintended noindex tags and update XML sitemap'],
+            ['HTTPS & Host', 'Mixed content or both www and apex loading', 'Enforce TLS and use single-hop 301 redirects'],
+            ['Broken Links', 'Internal 404/500 errors or redirect chains', 'Update links directly to final live 200-status URLs'],
+            ['Canonicals', 'Duplicate URLs from UTM tags or trailing slashes', 'Add self-referencing canonical tags and consistent links'],
+            ['Mobile & Speed', 'Heavy images, layout shifts, horizontal scroll', 'Serve WebP/AVIF images with dimensions and responsive CSS'],
+          ],
+        },
+      },
+      {
+        heading: 'Step-by-Step Technical SEO Audit Checklist (10 Steps)',
+        paragraphs: [
+          'Follow these ten steps sequentially when auditing an existing site or preparing a launch:',
+        ],
+        steps: [
+          'Confirm HTTPS and canonical host redirects: Test http://, https://, www, and non-www URLs so every variant resolves to one HTTPS host in a single redirect.',
+          'Check /robots.txt directly: Confirm public pages, stylesheets, and scripts remain crawlable and verify the live XML sitemap URL is declared.',
+          'Validate /sitemap.xml: Verify valid XML syntax, confirm every listed URL returns HTTP 200 OK, and remove 404s, redirects, or noindex pages.',
+          'Inspect Google Search Console indexing reports: Check Page Indexing for unexpected "Blocked by robots.txt", "Excluded by noindex tag", or canonical mismatches.',
+          'Export broken links and redirect chains: Run a free crawler or link checker to locate internal 404/5xx errors and update links directly to live destinations.',
+          'Verify canonical tags across templates: Inspect page source on your homepage, categories, tools, and articles to confirm clean absolute canonical URLs.',
+          'Test mobile usability and heading hierarchy: Check phone viewports for wrapping, accessible navigation, breadcrumbs, and one clear H1 per page.',
+          'Measure page speed and media weights: Run Lighthouse or PageSpeed Insights, convert large images to WebP or AVIF, add width/height attributes, and trim blocking scripts.',
+          'Audit titles, meta descriptions, and copy depth: Check metadata lengths with our Meta Title Generator, Meta Description Generator, and Character Counter, then verify readability in our Word Counter.',
+          'Review internal cross-links across core guides: Connect related guides cleanly—including How to Write SEO Meta Titles and Meta Descriptions That Earn Clicks, Keyword Research Fundamentals: Mapping Search Intent Without Guesswork, and Content Structure, Readability, and Natural Keyword Density.',
+        ],
+      },
+      {
+        heading: 'Common Technical SEO Mistakes (And How to Fix Them)',
+        paragraphs: [
+          'Avoiding these common oversights prevents most beginner crawling and indexing headaches:',
+        ],
+        bullets: [
+          'Leaving staging Disallow: / rules active after launch: Verify robots.txt immediately after deployment so crawlers can reach your site.',
+          'Using robots.txt to hide a page tagged noindex: Crawlers cannot read noindex if blocked by robots.txt—allow crawling until deindexed.',
+          'Canonicalizing every inner page to the homepage: Point canonical tags strictly to each page’s exact preferred URL, never a generic homepage.',
+          'Allowing soft 404s on client-side single-page apps: Return clear not-found states with <meta name="robots" content="noindex, follow" /> on unknown routes.',
+          'Uploading unoptimized multi-megabyte images: Resize assets to display dimensions and convert to WebP or AVIF before publishing.',
+          'Changing URL slugs without 301 redirects: Always add permanent redirects and update navigation, sitemaps, and article links immediately.',
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'What is the difference between crawling and indexing in SEO?',
+        answer:
+          'Crawling is when search bots follow links and sitemaps to fetch page code and assets. Indexing is when search engines process that content, evaluate canonical and noindex signals, and store the URL in their search database.',
+      },
+      {
+        question: 'Should I use robots.txt or a noindex tag to keep a page out of Google Search?',
+        answer:
+          'Use a meta robots noindex tag (or X-Robots-Tag header) and keep the page crawlable in robots.txt. Blocking a page in robots.txt prevents bots from seeing the noindex directive, allowing the URL itself to remain indexed if linked externally.',
+      },
+      {
+        question: 'Do technical SEO fixes guarantee higher Google rankings?',
+        answer:
+          'No. Technical SEO removes access, rendering, and speed barriers while improving visitor experience, whereas rankings depend on search intent match, content helpfulness, and competition.',
+      },
+      {
+        question: 'How often should I run a technical SEO audit?',
+        answer:
+          'Run a complete audit before launch, immediately after domain migrations or redesigns, and quarterly thereafter, checking Google Search Console monthly for new errors.',
+      },
+      {
+        question: 'Can I complete a technical SEO audit using only free tools?',
+        answer:
+          'Yes. Google Search Console, browser Developer Tools (Network and Lighthouse tabs), PageSpeed Insights, and direct robots.txt/sitemap checks cover foundational audits—alongside our free Meta Title Generator and Character Counter.',
       },
     ],
   },
