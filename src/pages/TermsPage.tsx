@@ -4,14 +4,29 @@ import { SeoHead, SITE_URL } from '../components/SeoHead';
 export function TermsPage() {
   const origin = SITE_URL;
 
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: 'Terms & Conditions | SmartGrow Tools',
-    url: `${origin}/terms-and-conditions`,
-    description:
-      'Review the Terms and Conditions for using SmartGrow Tools free SEO, social media, content writing, and marketing calculator utilities.',
-  };
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Terms & Conditions | SmartGrow Tools',
+      url: `${origin}/terms-and-conditions`,
+      description:
+        'Review the Terms and Conditions for using SmartGrow Tools free SEO, social media, content writing, and marketing calculator utilities.',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${origin}/` },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Terms & Conditions',
+          item: `${origin}/terms-and-conditions`,
+        },
+      ],
+    },
+  ];
 
   return (
     <>

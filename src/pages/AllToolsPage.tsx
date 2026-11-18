@@ -35,14 +35,33 @@ export function AllToolsPage() {
 
   const origin = SITE_URL;
 
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: 'All SmartGrow Tools',
-    url: `${origin}/tools`,
-    description:
-      'Browse all 10 free browser-based SmartGrow Tools across SEO metadata, keyword ideation, social copy, content counters, and marketing calculators.',
-  };
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'All SmartGrow Tools',
+      url: `${origin}/tools`,
+      description:
+        'Browse all 10 free browser-based SmartGrow Tools across SEO metadata, keyword ideation, social copy, content counters, and marketing calculators.',
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: TOOLS.map((tool, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: tool.name,
+          url: `${origin}${tool.path}`,
+        })),
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${origin}/` },
+        { '@type': 'ListItem', position: 2, name: 'All Tools', item: `${origin}/tools` },
+      ],
+    },
+  ];
 
   return (
     <>
@@ -159,6 +178,19 @@ export function AllToolsPage() {
               ))}
             </div>
           )}
+
+          <div className="mt-10 pt-6 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-sm">
+            <p className="text-slate-600">
+              Want practical guides on applying these utilities to your search and ad campaigns?
+            </p>
+            <Link
+              to="/articles"
+              className="inline-flex items-center gap-1.5 font-semibold text-purple-700 hover:text-purple-800 whitespace-nowrap shrink-0"
+            >
+              <span>Read Educational Articles</span>
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </section>
     </>

@@ -6,14 +6,24 @@ import { SafeImage } from '../components/SafeImage';
 export function AboutPage() {
   const origin = SITE_URL;
 
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'AboutPage',
-    name: 'About SmartGrow Tools',
-    url: `${origin}/about`,
-    description:
-      'Learn how SmartGrow Tools builds fast, free, privacy-respecting SEO, content writing, social media, and marketing calculation utilities.',
-  };
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'AboutPage',
+      name: 'About SmartGrow Tools',
+      url: `${origin}/about`,
+      description:
+        'Learn how SmartGrow Tools builds fast, free, privacy-respecting SEO, content writing, social media, and marketing calculation utilities.',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${origin}/` },
+        { '@type': 'ListItem', position: 2, name: 'About Us', item: `${origin}/about` },
+      ],
+    },
+  ];
 
   return (
     <>

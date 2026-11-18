@@ -44,20 +44,30 @@ export function ContactPage() {
 
   const origin = SITE_URL;
 
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'ContactPage',
-    name: 'Contact SmartGrow Tools',
-    url: `${origin}/contact`,
-    description:
-      'Get in touch with the SmartGrow Tools team to report an issue, suggest a new marketing utility, or ask a question.',
-  };
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ContactPage',
+      name: 'Contact SmartGrow Tools',
+      url: `${origin}/contact`,
+      description:
+        'Contact the SmartGrow Tools team to report an issue, suggest a new free SEO or marketing utility, or ask questions about our browser tools.',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${origin}/` },
+        { '@type': 'ListItem', position: 2, name: 'Contact Us', item: `${origin}/contact` },
+      ],
+    },
+  ];
 
   return (
     <>
       <SeoHead
         title="Contact SmartGrow Tools – Feedback & Tool Suggestions"
-        description="Get in touch with the SmartGrow Tools team to report an issue, suggest a new marketing utility, or ask a question."
+        description="Contact the SmartGrow Tools team to report an issue, suggest a new free SEO or marketing utility, or ask questions about our browser tools."
         path="/contact"
         structuredData={structuredData}
       />

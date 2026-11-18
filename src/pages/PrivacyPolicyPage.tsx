@@ -4,20 +4,30 @@ import { SeoHead, SITE_URL } from '../components/SeoHead';
 export function PrivacyPolicyPage() {
   const origin = SITE_URL;
 
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: 'Privacy Policy | SmartGrow Tools',
-    url: `${origin}/privacy-policy`,
-    description:
-      'Read the SmartGrow Tools Privacy Policy covering local browser processing, Google Analytics 4, Google AdSense, advertising cookies, cookie controls, and applicable privacy rights.',
-  };
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Privacy Policy | SmartGrow Tools',
+      url: `${origin}/privacy-policy`,
+      description:
+        'Read the SmartGrow Tools Privacy Policy covering browser-local processing, Google Analytics 4, Google AdSense cookies, and user privacy rights.',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${origin}/` },
+        { '@type': 'ListItem', position: 2, name: 'Privacy Policy', item: `${origin}/privacy-policy` },
+      ],
+    },
+  ];
 
   return (
     <>
       <SeoHead
         title="Privacy Policy & Cookie Disclosures | SmartGrow Tools"
-        description="Read the SmartGrow Tools Privacy Policy covering local browser processing, Google Analytics 4, Google AdSense, advertising cookies, cookie controls, and applicable privacy rights."
+        description="Read the SmartGrow Tools Privacy Policy covering browser-local processing, Google Analytics 4, Google AdSense cookies, and user privacy rights."
         path="/privacy-policy"
         structuredData={structuredData}
       />

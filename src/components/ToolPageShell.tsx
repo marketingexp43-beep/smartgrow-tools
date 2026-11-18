@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { CATEGORIES, ToolDefinition, getToolsByCategory } from '../data/tools';
+import { ARTICLES } from '../data/articles';
 import { SeoHead, SITE_URL } from './SeoHead';
 
 interface ToolPageShellProps {
@@ -12,6 +13,7 @@ interface ToolPageShellProps {
 export function ToolPageShell({ tool, children }: ToolPageShellProps) {
   const category = CATEGORIES.find((c) => c.id === tool.categoryId);
   const siblingTools = getToolsByCategory(tool.categoryId).filter((t) => t.id !== tool.id);
+  const relatedArticles = ARTICLES.filter((a) => a.relatedToolSlugs.includes(tool.slug));
 
   const origin = SITE_URL;
 
@@ -216,6 +218,36 @@ export function ToolPageShell({ tool, children }: ToolPageShellProps) {
                   </Link>
                 )}
               </div>
+
+              {relatedArticles.length > 0 && (
+                <div className="mt-8 pt-6 border-t border-slate-200">
+                  <h2 className="font-display text-lg font-bold text-slate-900 mb-3">
+                    Related Guides
+                  </h2>
+                  <div className="space-y-2.5">
+                    {relatedArticles.map((article) => (
+                      <Link
+                        key={article.slug}
+                        to={article.path}
+                        className="group block p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:border-purple-300 hover:bg-purple-50/20 transition-colors"
+                      >
+                        <div className="text-[11px] font-semibold text-purple-700 mb-1">
+                          {article.category} · {article.readTime}
+                        </div>
+                        <div className="flex items-center justify-between gap-3">
+                          <h3 className="text-sm font-semibold text-slate-900 group-hover:text-purple-700 transition-colors leading-snug">
+                            {article.title}
+                          </h3>
+                          <ArrowRight
+                            className="w-4 h-4 text-slate-400 group-hover:text-purple-600 group-hover:translate-x-0.5 transition-transform shrink-0"
+                            aria-hidden="true"
+                          />
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </section>

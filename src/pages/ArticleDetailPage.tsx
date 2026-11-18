@@ -63,6 +63,11 @@ export function ArticleDetailPage() {
       publisher: {
         '@type': 'Organization',
         name: 'SmartGrow Tools',
+        url: origin,
+        logo: {
+          '@type': 'ImageObject',
+          url: `${origin}/favicon.svg`,
+        },
       },
     },
     {
@@ -84,6 +89,9 @@ export function ArticleDetailPage() {
         path={article.path}
         ogType="article"
         image={article.coverImage}
+        imageAlt={article.coverAlt}
+        publishedTime={article.isoDate}
+        section={article.category}
         structuredData={structuredData}
       />
 

@@ -16,6 +16,17 @@ export function Layout({ children }: LayoutProps) {
     window.scrollTo({ top: 0, behavior: 'auto' });
   }, [pathname]);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
+
   const navItems = [
     ...CATEGORIES.map((c) => ({ label: c.navLabel, to: c.path })),
     { label: 'Articles', to: '/articles' },
@@ -73,6 +84,7 @@ export function Layout({ children }: LayoutProps) {
               onClick={() => setMobileMenuOpen((prev) => !prev)}
               className="lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors"
               aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
               aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             >
               {mobileMenuOpen ? (
@@ -85,7 +97,7 @@ export function Layout({ children }: LayoutProps) {
         </div>
 
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-slate-200 bg-white">
+          <div id="mobile-navigation" className="lg:hidden border-t border-slate-200 bg-white">
             <nav aria-label="Mobile Navigation" className="max-w-6xl mx-auto px-4 py-4 flex flex-col gap-1">
               {navItems.map((item) => (
                 <NavLink

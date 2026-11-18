@@ -73,19 +73,40 @@ export function HomePage() {
 
   const origin = SITE_URL;
 
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'SmartGrow Tools',
-    url: `${origin}/`,
-    description:
-      'Free browser-based SEO generators, social media utilities, content writing counters, and digital marketing calculators.',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${origin}/tools?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'SmartGrow Tools',
+      url: `${origin}/`,
+      description:
+        'Free browser-based SEO generators, social media utilities, content writing counters, and digital marketing calculators.',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: `${origin}/tools?q={search_term_string}`,
+        'query-input': 'required name=search_term_string',
+      },
     },
-  };
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: 'SmartGrow Tools',
+      url: `${origin}/`,
+      logo: `${origin}/favicon.svg`,
+      email: 'hello@smartgrowtools.com',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'SmartGrow SEO & Digital Marketing Tools',
+      itemListElement: TOOLS.map((tool, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: tool.name,
+        url: `${origin}${tool.path}`,
+      })),
+    },
+  ];
 
   return (
     <>
@@ -129,6 +150,7 @@ export function HomePage() {
                       placeholder="Search tools or guides (e.g., Meta Title, CPC, Word Counter)..."
                       aria-label="Search tools or articles"
                       aria-expanded={searchQuery.trim().length > 0}
+                      aria-controls={searchQuery.trim().length > 0 ? 'hero-search-results' : undefined}
                       className="w-full rounded-xl border border-slate-300 bg-white pl-10 pr-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-blue-600 focus:outline-none"
                     />
                   </div>
@@ -143,7 +165,10 @@ export function HomePage() {
               </form>
 
               {searchQuery.trim().length > 0 && (
-                <div className="absolute left-0 right-0 mt-2 bg-white border border-slate-200 rounded-xl shadow-lg z-30 overflow-hidden">
+                <div
+                  id="hero-search-results"
+                  className="absolute left-0 right-0 mt-2 bg-white border border-slate-200 rounded-xl shadow-lg z-30 overflow-hidden"
+                >
                   {searchResults.length === 0 ? (
                     <div className="p-4 text-sm text-slate-500">
                       No matching tools or articles found for "{searchQuery}".{' '}

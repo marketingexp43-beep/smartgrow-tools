@@ -49,26 +49,31 @@ export function CopyButton({
         : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:border-slate-300';
 
   return (
-    <button
-      type="button"
-      onClick={handleCopy}
-      disabled={!text}
-      className={`${baseStyle} ${variantStyle} ${className}`}
-      aria-label={copied ? copiedLabel : label}
-    >
-      {copied ? (
-        <>
-          <Check className="w-3.5 h-3.5 text-emerald-600" aria-hidden="true" />
-          <span className={variant === 'primary' ? 'text-white' : 'text-emerald-700'}>
-            {copiedLabel}
-          </span>
-        </>
-      ) : (
-        <>
-          <Copy className="w-3.5 h-3.5" aria-hidden="true" />
-          <span>{label}</span>
-        </>
-      )}
-    </button>
+    <>
+      <button
+        type="button"
+        onClick={handleCopy}
+        disabled={!text}
+        className={`${baseStyle} ${variantStyle} ${className}`}
+        aria-label={copied ? copiedLabel : label}
+      >
+        {copied ? (
+          <>
+            <Check className="w-3.5 h-3.5 text-emerald-600" aria-hidden="true" />
+            <span className={variant === 'primary' ? 'text-white' : 'text-emerald-700'}>
+              {copiedLabel}
+            </span>
+          </>
+        ) : (
+          <>
+            <Copy className="w-3.5 h-3.5" aria-hidden="true" />
+            <span>{label}</span>
+          </>
+        )}
+      </button>
+      <span className="sr-only" role="status" aria-live="polite">
+        {copied ? `${copiedLabel} to clipboard` : ''}
+      </span>
+    </>
   );
 }

@@ -29,14 +29,33 @@ export function ArticlesPage() {
 
   const origin = SITE_URL;
 
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: 'SEO & Digital Marketing Articles',
-    url: `${origin}/articles`,
-    description:
-      'Read practical, beginner-friendly articles on SEO metadata, search intent, keyword density, social discovery, and paid campaign metrics.',
-  };
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'SEO & Digital Marketing Articles',
+      url: `${origin}/articles`,
+      description:
+        'Read practical, beginner-friendly articles on SEO metadata, search intent, keyword density, social discovery, and paid campaign metrics.',
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: ARTICLES.map((article, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: article.title,
+          url: `${origin}${article.path}`,
+        })),
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${origin}/` },
+        { '@type': 'ListItem', position: 2, name: 'Articles', item: `${origin}/articles` },
+      ],
+    },
+  ];
 
   return (
     <>
@@ -153,6 +172,19 @@ export function ArticlesPage() {
               ))}
             </div>
           )}
+
+          <div className="mt-10 pt-6 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-sm">
+            <p className="text-slate-600">
+              Ready to put these workflows into practice with live previews and counters?
+            </p>
+            <Link
+              to="/tools"
+              className="inline-flex items-center gap-1.5 font-semibold text-blue-700 hover:text-blue-800 whitespace-nowrap shrink-0"
+            >
+              <span>Browse All 10 Tools</span>
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </section>
     </>
