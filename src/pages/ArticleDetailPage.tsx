@@ -333,24 +333,31 @@ export function ArticleDetailPage() {
                 Open the matching SmartGrow tools referenced in this guide:
               </p>
               <div className="space-y-3">
-                {relatedTools.map((tool) => (
-                  <Link
-                    key={tool.id}
-                    to={tool.path}
-                    className="group block bg-white border border-slate-200 rounded-lg p-3.5 hover:border-blue-300 transition-colors"
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-sm font-semibold text-slate-900 group-hover:text-blue-700">
-                        {tool.name}
-                      </span>
-                      <ArrowRight
-                        className="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"
-                        aria-hidden="true"
-                      />
-                    </div>
-                    <p className="mt-1 text-xs text-slate-500">{tool.categoryName}</p>
-                  </Link>
-                ))}
+                {relatedTools.map((tool) => {
+                  const allSameCategory =
+                    relatedTools.length > 1 &&
+                    new Set(relatedTools.map((t) => t.categoryId)).size === 1;
+                  return (
+                    <Link
+                      key={tool.id}
+                      to={tool.path}
+                      className="group block bg-white border border-slate-200 rounded-lg p-3.5 hover:border-blue-300 transition-colors"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-sm font-semibold text-slate-900 group-hover:text-blue-700">
+                          {tool.name}
+                        </span>
+                        <ArrowRight
+                          className="w-4 h-4 text-slate-400 group-hover:text-blue-600 shrink-0"
+                          aria-hidden="true"
+                        />
+                      </div>
+                      {!allSameCategory && (
+                        <p className="mt-1 text-xs text-slate-500">{tool.categoryName}</p>
+                      )}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
 
