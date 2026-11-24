@@ -29,6 +29,7 @@ export function Layout({ children }: LayoutProps) {
 
   const navItems = [
     ...CATEGORIES.map((c) => ({ label: c.navLabel, to: c.path })),
+    { label: 'PDF Tools', to: '/pdf-tools' },
     { label: 'Articles', to: '/articles' },
   ];
 
@@ -114,12 +115,18 @@ export function Layout({ children }: LayoutProps) {
                   {item.label}
                 </NavLink>
               ))}
-              <div className="pt-2 mt-2 border-t border-slate-100">
+              <div className="pt-2 mt-2 border-t border-slate-100 flex flex-col gap-2">
                 <Link
                   to="/tools"
                   className="flex items-center justify-center w-full px-4 py-2.5 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
                 >
-                  Browse All 10 Tools
+                  Browse All Tools
+                </Link>
+                <Link
+                  to="/pdf-tools"
+                  className="flex items-center justify-center w-full px-4 py-2.5 text-sm font-semibold text-purple-700 border border-purple-200 bg-purple-50/50 hover:bg-purple-50 rounded-lg transition-colors"
+                >
+                  Browse All 25 PDF Tools
                 </Link>
               </div>
             </nav>
@@ -142,7 +149,7 @@ export function Layout({ children }: LayoutProps) {
                 SmartGrow Tools
               </Link>
               <p className="mt-3 text-sm text-slate-600 leading-relaxed max-w-xs">
-                Free browser-based SEO generators, social copy utilities, editorial counters, and marketing calculators built for clarity and speed.
+                Free browser-based SEO generators, social copy utilities, editorial counters, marketing calculators, and local PDF tools built for clarity and speed.
               </p>
             </div>
 
@@ -159,6 +166,11 @@ export function Layout({ children }: LayoutProps) {
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <Link to="/pdf-tools" className="hover:text-blue-700 transition-colors">
+                    PDF Tools (25 Utilities)
+                  </Link>
+                </li>
                 <li>
                   <Link to="/tools" className="hover:text-blue-700 transition-colors">
                     All Tools Directory
@@ -188,14 +200,6 @@ export function Layout({ children }: LayoutProps) {
                 </li>
                 <li>
                   <Link
-                    to="/tools/word-counter"
-                    className="hover:text-blue-700 transition-colors"
-                  >
-                    Word Counter
-                  </Link>
-                </li>
-                <li>
-                  <Link
                     to="/tools/cpc-calculator"
                     className="hover:text-blue-700 transition-colors"
                   >
@@ -204,10 +208,26 @@ export function Layout({ children }: LayoutProps) {
                 </li>
                 <li>
                   <Link
-                    to="/tools/ctr-calculator"
+                    to="/pdf-tools/merge-pdf"
                     className="hover:text-blue-700 transition-colors"
                   >
-                    CTR Calculator
+                    Merge PDF
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/pdf-tools/compress-pdf"
+                    className="hover:text-blue-700 transition-colors"
+                  >
+                    Compress PDF
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/pdf-tools/pdf-to-word"
+                    className="hover:text-blue-700 transition-colors"
+                  >
+                    PDF to Word (DOCX)
                   </Link>
                 </li>
               </ul>

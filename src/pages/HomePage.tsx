@@ -4,12 +4,19 @@ import {
   ArrowRight,
   BookOpen,
   Calculator,
+  FileCog,
+  FileEdit,
+  FileOutput,
   FileText,
+  Layers,
+  Lock,
   Search,
   Share2,
+  Sparkles,
   TrendingUp,
 } from 'lucide-react';
 import { CATEGORIES, CategoryId, TOOLS } from '../data/tools';
+import { PDF_CATEGORIES, PDF_TOOLS, PdfCategoryId } from '../data/pdfTools';
 import { ARTICLES } from '../data/articles';
 import { SeoHead, SITE_URL } from '../components/SeoHead';
 import { SafeImage } from '../components/SafeImage';
@@ -21,22 +28,45 @@ const CATEGORY_ICONS: Record<CategoryId, typeof Search> = {
   'marketing-calculators': Calculator,
 };
 
+const PDF_CATEGORY_ICONS: Record<PdfCategoryId, typeof Layers> = {
+  'organize-pdf': Layers,
+  'optimize-pdf': FileCog,
+  'convert-pdf': FileOutput,
+  'edit-pdf': FileEdit,
+  'pdf-security': Lock,
+  'pdf-intelligence': Sparkles,
+};
+
 export function HomePage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<'all' | CategoryId>('all');
+  const [activePdfCategory, setActivePdfCategory] = useState<'all' | PdfCategoryId>('all');
   const navigate = useNavigate();
 
   const searchResults = useMemo(() => {
     const q = searchQuery.trim().toLowerCase();
     if (!q) return [];
-    const matchedTools = TOOLS.filter(
+    const matchedMarketing = TOOLS.filter(
       (t) =>
         t.name.toLowerCase().includes(q) ||
         t.shortDescription.toLowerCase().includes(q) ||
         t.categoryName.toLowerCase().includes(q) ||
         t.keywords.some((k) => k.toLowerCase().includes(q))
     ).map((t) => ({
-      type: 'Tool' as const,
+      type: 'Marketing Tool' as const,
+      title: t.name,
+      subtitle: t.categoryName,
+      path: t.path,
+    }));
+
+    const matchedPdf = PDF_TOOLS.filter(
+      (t) =>
+        t.name.toLowerCase().includes(q) ||
+        t.shortDescription.toLowerCase().includes(q) ||
+        t.categoryName.toLowerCase().includes(q) ||
+        t.keywords.some((k) => k.toLowerCase().includes(q))
+    ).map((t) => ({
+      type: 'PDF Tool' as const,
       title: t.name,
       subtitle: t.categoryName,
       path: t.path,
@@ -54,13 +84,18 @@ export function HomePage() {
       path: a.path,
     }));
 
-    return [...matchedTools, ...matchedArticles].slice(0, 6);
+    return [...matchedMarketing, ...matchedPdf, ...matchedArticles].slice(0, 7);
   }, [searchQuery]);
 
   const visibleTools = useMemo(() => {
     if (activeCategory === 'all') return TOOLS;
     return TOOLS.filter((t) => t.categoryId === activeCategory);
   }, [activeCategory]);
+
+  const visiblePdfTools = useMemo(() => {
+    if (activePdfCategory === 'all') return PDF_TOOLS;
+    return PDF_TOOLS.filter((t) => t.categoryId === activePdfCategory);
+  }, [activePdfCategory]);
 
   const handleSearchSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -80,7 +115,7 @@ export function HomePage() {
       name: 'SmartGrow Tools',
       url: `${origin}/`,
       description:
-        'Free browser-based SEO generators, social media utilities, content writing counters, and digital marketing calculators.',
+        'Free browser-based SEO generators, social media utilities, content writing counters, digital marketing calculators, and local PDF document tools.',
       potentialAction: {
         '@type': 'SearchAction',
         target: `${origin}/tools?q={search_term_string}`,
@@ -98,8 +133,8 @@ export function HomePage() {
     {
       '@context': 'https://schema.org',
       '@type': 'ItemList',
-      name: 'SmartGrow SEO & Digital Marketing Tools',
-      itemListElement: TOOLS.map((tool, index) => ({
+      name: 'SmartGrow SEO, Digital Marketing & PDF Tools',
+      itemListElement: [...TOOLS, ...PDF_TOOLS].map((tool, index) => ({
         '@type': 'ListItem',
         position: index + 1,
         name: tool.name,
@@ -111,8 +146,8 @@ export function HomePage() {
   return (
     <>
       <SeoHead
-        title="SmartGrow Tools – Free SEO & Digital Marketing Tools"
-        description="Free browser-based SEO generators, social media tools, content counters, and marketing calculators. Fast, private, and ready to use with no sign-up."
+        title="SmartGrow Tools – Free SEO, Digital Marketing & PDF Tools"
+        description="Free browser-based SEO generators, social media tools, content counters, marketing calculators, and 25 private PDF tools. Fast, local, and ready with no sign-up."
         path="/"
         structuredData={structuredData}
       />
@@ -122,13 +157,13 @@ export function HomePage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 lg:py-20 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
           <div className="lg:col-span-7 flex flex-col justify-center">
             <p className="text-xs font-semibold tracking-wide text-blue-700 mb-3">
-              Free Browser-Based Marketing Suite
+              Free Browser-Based Marketing &amp; PDF Suite
             </p>
             <h1 className="font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.12]">
-              Practical SEO &amp; Digital Marketing Tools Without the Bloat
+              Practical SEO, Marketing &amp; PDF Tools Without the Bloat
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
-              Generate search-ready metadata, structure keyword lists, check character limits, and calculate campaign economics instantly inside your browser.
+              Generate search-ready metadata, calculate campaign economics, and merge, compress, convert, edit, or OCR PDF documents directly inside your browser.
             </p>
 
             {/* Working Search Bar */}
@@ -147,7 +182,7 @@ export function HomePage() {
                       onKeyDown={(e) => {
                         if (e.key === 'Escape') setSearchQuery('');
                       }}
-                      placeholder="Search tools or guides (e.g., Meta Title, CPC, Word Counter)..."
+                      placeholder="Search tools (e.g., Meta Title, CPC, Merge PDF, Compress, OCR)..."
                       aria-label="Search tools or articles"
                       aria-expanded={searchQuery.trim().length > 0}
                       aria-controls={searchQuery.trim().length > 0 ? 'hero-search-results' : undefined}
@@ -201,15 +236,15 @@ export function HomePage() {
             </div>
 
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-600">
-              <span>10 focused utilities</span>
+              <span>10 SEO &amp; marketing tools</span>
               <span aria-hidden="true" className="text-slate-300">
                 ·
               </span>
-              <span>No account or API key required</span>
+              <span>25 local PDF utilities</span>
               <span aria-hidden="true" className="text-slate-300">
                 ·
               </span>
-              <span>Runs locally in your browser</span>
+              <span>No account, API key, or file uploads</span>
             </div>
           </div>
 
@@ -229,23 +264,26 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Categories Overview */}
+      {/* Section A: SEO & Digital Marketing Tools Overview */}
       <section className="py-14 lg:py-16 bg-slate-50/60 border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
             <div>
+              <div className="text-xs font-semibold text-blue-700 mb-1.5">
+                A. SEO &amp; Digital Marketing Tools
+              </div>
               <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
-                Four Dedicated Tool Suites
+                Four Dedicated Marketing Suites
               </h2>
               <p className="mt-1.5 text-sm sm:text-base text-slate-600">
-                Jump directly into a category page or open any utility below.
+                Jump directly into a category page or launch any marketing utility below.
               </p>
             </div>
             <Link
               to="/tools"
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-700 hover:text-blue-800 whitespace-nowrap"
             >
-              <span>View all 10 tools</span>
+              <span>View all tools directory</span>
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </Link>
           </div>
@@ -294,13 +332,13 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Filterable Tools Directory */}
-      <section className="py-14 lg:py-16 bg-white">
+      {/* Filterable Marketing Tools Directory */}
+      <section className="py-14 lg:py-16 bg-white border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-8">
             <div>
               <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
-                All Working Utilities
+                SEO &amp; Marketing Utilities
               </h2>
               <p className="mt-1.5 text-sm sm:text-base text-slate-600">
                 Every tool runs on its own dedicated page with transparent logic and instant copy controls.
@@ -370,15 +408,145 @@ export function HomePage() {
         </div>
       </section>
 
+      {/* Section B: Complete Browser PDF Tools Suite */}
+      <section className="py-14 lg:py-16 bg-slate-50/60 border-b border-slate-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div>
+              <div className="text-xs font-semibold text-purple-700 mb-1.5">
+                B. PDF Tools
+              </div>
+              <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+                25 Private Browser-Based PDF Tools
+              </h2>
+              <p className="mt-1.5 text-sm sm:text-base text-slate-600 max-w-2xl">
+                Organize, optimize, convert, edit, protect, and extract text from PDFs locally on your device without uploading private documents.
+              </p>
+            </div>
+            <Link
+              to="/pdf-tools"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-purple-700 hover:text-purple-800 whitespace-nowrap"
+            >
+              <span>Open PDF tools directory</span>
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            {PDF_CATEGORIES.map((category) => {
+              const Icon = PDF_CATEGORY_ICONS[category.id];
+              const count = PDF_TOOLS.filter((t) => t.categoryId === category.id).length;
+              const isPurple = category.accentTone === 'purple';
+
+              return (
+                <Link
+                  key={category.id}
+                  to={`/pdf-tools?category=${category.id}`}
+                  className="group bg-white border border-slate-200 rounded-xl p-5 hover:border-blue-300 transition-colors flex items-start gap-4"
+                >
+                  <div
+                    className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${
+                      isPurple
+                        ? 'bg-purple-50 text-purple-700 border border-purple-100'
+                        : 'bg-blue-50 text-blue-700 border border-blue-100'
+                    }`}
+                  >
+                    <Icon className="w-5 h-5" aria-hidden="true" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between gap-2">
+                      <h3 className="font-display text-base font-bold text-slate-900 group-hover:text-blue-700 transition-colors">
+                        {category.name}
+                      </h3>
+                      <span className="font-mono text-xs text-slate-500 tabular-nums shrink-0">
+                        {count} tools
+                      </span>
+                    </div>
+                    <p className="mt-1.5 text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-2">
+                      {category.description}
+                    </p>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <h3 className="font-display text-lg font-bold text-slate-900">
+              All PDF Utilities
+            </h3>
+            <div className="flex flex-wrap items-center gap-1 p-1 bg-slate-200/70 rounded-lg">
+              <button
+                type="button"
+                aria-pressed={activePdfCategory === 'all'}
+                onClick={() => setActivePdfCategory('all')}
+                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors whitespace-nowrap ${
+                  activePdfCategory === 'all'
+                    ? 'bg-white text-blue-700 shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                All ({PDF_TOOLS.length})
+              </button>
+              {PDF_CATEGORIES.map((cat) => (
+                <button
+                  key={cat.id}
+                  type="button"
+                  aria-pressed={activePdfCategory === cat.id}
+                  onClick={() => setActivePdfCategory(cat.id)}
+                  className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors whitespace-nowrap ${
+                    activePdfCategory === cat.id
+                      ? 'bg-white text-blue-700 shadow-xs'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  {cat.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {visiblePdfTools.map((tool) => (
+              <Link
+                key={tool.id}
+                to={tool.path}
+                className="group bg-white border border-slate-200 rounded-xl p-5 hover:border-blue-300 transition-colors flex flex-col justify-between"
+              >
+                <div>
+                  <div className="text-xs font-medium text-blue-700 mb-1.5">
+                    {tool.categoryName}
+                  </div>
+                  <h4 className="font-display text-base font-bold text-slate-900 group-hover:text-blue-700 transition-colors">
+                    {tool.name}
+                  </h4>
+                  <p className="mt-1.5 text-sm text-slate-600 leading-relaxed">
+                    {tool.shortDescription}
+                  </p>
+                </div>
+
+                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-blue-700">
+                  <span>Open PDF tool</span>
+                  <ArrowRight
+                    className="w-4 h-4 group-hover:translate-x-0.5 transition-transform"
+                    aria-hidden="true"
+                  />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Editorial Principles (Honest, No Fake Claims) */}
-      <section className="py-14 lg:py-16 bg-slate-50/60 border-t border-b border-slate-200">
+      <section className="py-14 lg:py-16 bg-white border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="max-w-2xl mb-10">
             <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
               Built Around Three Simple Standards
             </h2>
             <p className="mt-2 text-sm sm:text-base text-slate-600 leading-relaxed">
-              Day-to-day marketing checks should not sit behind sign-up walls or slow dashboards.
+              Day-to-day marketing checks and document tasks should not sit behind sign-up walls or third-party upload queues.
             </p>
           </div>
 
@@ -386,10 +554,10 @@ export function HomePage() {
             <div>
               <div className="font-mono text-xs font-semibold text-blue-700 mb-2">01. Local Processing</div>
               <h3 className="font-display text-base font-bold text-slate-900">
-                Your Copy Stays in Your Browser
+                Your Copy &amp; PDFs Stay in Your Browser
               </h3>
               <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                Counters, keyword combiners, and ad calculators run directly in client-side JavaScript without storing your drafts on an external database.
+                Counters, keyword combiners, calculators, and all PDF utilities run directly in client-side JavaScript without uploading your files or drafts to external servers.
               </p>
             </div>
 
@@ -399,17 +567,17 @@ export function HomePage() {
                 Zero Subscriptions or Usage Caps
               </h3>
               <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                Every generator and calculator works immediately on load without paid API keys, credit limits, or email gates.
+                Every generator, calculator, and PDF editor works immediately on load without paid API keys, credit limits, or email gates.
               </p>
             </div>
 
             <div>
-              <div className="font-mono text-xs font-semibold text-blue-700 mb-2">03. Transparent Math</div>
+              <div className="font-mono text-xs font-semibold text-blue-700 mb-2">03. Transparent Limits</div>
               <h3 className="font-display text-base font-bold text-slate-900">
-                Clear Formulas &amp; Real Limits
+                Clear Formulas &amp; Honest Capabilities
               </h3>
               <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                SERP pixel widths, social character caps, and CPC/CTR formulas are surfaced openly alongside each workspace so you can verify every number.
+                SERP pixel widths, CPC/CTR math, and client-side PDF format boundaries are explained openly alongside each workspace so you know exactly what to expect.
               </p>
             </div>
           </div>
@@ -417,7 +585,7 @@ export function HomePage() {
       </section>
 
       {/* Educational Articles Section */}
-      <section className="py-14 lg:py-16 bg-white">
+      <section className="py-14 lg:py-16 bg-slate-50/40">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
             <div>

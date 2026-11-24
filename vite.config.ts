@@ -42,6 +42,22 @@ export default defineConfig(() => {
             if (id.includes('node_modules/lucide-react/')) {
               return 'vendor-icons';
             }
+            if (id.includes('node_modules/pdf-lib/') || id.includes('node_modules/@cantoo/pdf-lib/')) {
+              return 'vendor-pdf-lib';
+            }
+            if (id.includes('node_modules/pdfjs-dist/')) {
+              return 'vendor-pdfjs';
+            }
+            if (id.includes('node_modules/tesseract.js/')) {
+              return 'vendor-ocr';
+            }
+            if (
+              id.includes('node_modules/docx/') ||
+              id.includes('node_modules/mammoth/') ||
+              id.includes('node_modules/jszip/')
+            ) {
+              return 'vendor-office';
+            }
           },
         },
       },

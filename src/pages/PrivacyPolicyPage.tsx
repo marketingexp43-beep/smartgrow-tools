@@ -41,7 +41,7 @@ export function PrivacyPolicyPage() {
             </h1>
             <p className="mt-2 text-sm text-slate-500">Last updated: November 2026</p>
             <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed max-w-3xl">
-              This Privacy Policy explains how SmartGrow Tools handles information when you use our browser-based SEO, social media, content writing, and marketing calculator utilities, as well as how analytics and advertising services such as Google Analytics and Google AdSense operate on this website.
+              This Privacy Policy explains how SmartGrow Tools handles information when you use our browser-based SEO, social media, content writing, marketing calculator, and PDF document utilities, as well as how analytics and advertising services such as Google Analytics and Google AdSense operate on this website.
             </p>
           </div>
         </header>
@@ -52,7 +52,7 @@ export function PrivacyPolicyPage() {
               1. Local Browser Processing
             </h2>
             <p>
-              SmartGrow Tools is designed so that all text inputs, meta tag drafts, keyword lists, character counts, and paid media calculations are processed directly inside your web browser. We do not transmit or store the content you paste into our generators, counters, or calculators on external servers.
+              SmartGrow Tools is designed so that all text inputs, meta tag drafts, keyword lists, character counts, paid media calculations, and PDF files (including documents, images, signatures, passwords, and OCR scans) are processed directly inside your web browser. We do not upload, transmit, or store the files or content you enter into our marketing generators, counters, calculators, or PDF tools on external servers.
             </p>
           </section>
 

@@ -2,18 +2,32 @@ import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Search } from 'lucide-react';
 import { CATEGORIES, CategoryId, TOOLS } from '../data/tools';
+import { PDF_TOOLS } from '../data/pdfTools';
 import { SeoHead, SITE_URL } from '../components/SeoHead';
 
 export function AllToolsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialQ = searchParams.get('q') || '';
   const [query, setQuery] = useState(initialQ);
-  const [selectedCategory, setSelectedCategory] = useState<'all' | CategoryId>('all');
+  const [selectedFilter, setSelectedFilter] = useState<'all' | 'pdf' | CategoryId>('all');
+
+  const combinedTools = useMemo(
+    () => [
+      ...TOOLS.map((t) => ({ ...t, suite: 'marketing' as const })),
+      ...PDF_TOOLS.map((t) => ({ ...t, suite: 'pdf' as const })),
+    ],
+    []
+  );
 
   const filteredTools = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return TOOLS.filter((tool) => {
-      const catMatch = selectedCategory === 'all' || tool.categoryId === selectedCategory;
+    return combinedTools.filter((tool) => {
+      const catMatch =
+        selectedFilter === 'all'
+          ? true
+          : selectedFilter === 'pdf'
+            ? tool.suite === 'pdf'
+            : tool.categoryId === selectedFilter;
       const textMatch =
         !q ||
         tool.name.toLowerCase().includes(q) ||
@@ -22,7 +36,7 @@ export function AllToolsPage() {
         tool.keywords.some((k) => k.toLowerCase().includes(q));
       return catMatch && textMatch;
     });
-  }, [query, selectedCategory]);
+  }, [combinedTools, query, selectedFilter]);
 
   const handleQueryChange = (val: string) => {
     setQuery(val);
@@ -42,10 +56,10 @@ export function AllToolsPage() {
       name: 'All SmartGrow Tools',
       url: `${origin}/tools`,
       description:
-        'Browse all 10 free browser-based SmartGrow Tools across SEO metadata, keyword ideation, social copy, content counters, and marketing calculators.',
+        'Browse all free browser-based SmartGrow Tools across SEO metadata, keyword ideation, social copy, content counters, marketing calculators, and local PDF tools.',
       mainEntity: {
         '@type': 'ItemList',
-        itemListElement: TOOLS.map((tool, index) => ({
+        itemListElement: combinedTools.map((tool, index) => ({
           '@type': 'ListItem',
           position: index + 1,
           name: tool.name,
@@ -66,20 +80,31 @@ export function AllToolsPage() {
   return (
     <>
       <SeoHead
-        title="All SEO & Marketing Tools Directory | SmartGrow Tools"
-        description="Browse all 10 free browser-based SmartGrow Tools across SEO metadata, keyword ideation, social media copy, content counters, and marketing calculators."
+        title="All SEO, Marketing & PDF Tools Directory | SmartGrow Tools"
+        description="Browse all 35 free browser-based SmartGrow Tools across SEO metadata, social copy, content counters, marketing calculators, and local PDF utilities."
         path="/tools"
         structuredData={structuredData}
       />
 
       <section className="border-b border-slate-200 bg-slate-50/60">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 lg:py-14">
-          <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
-            All SmartGrow Tools
-          </h1>
-          <p className="mt-2.5 text-base text-slate-600 max-w-2xl">
-            Every generator, counter, and calculator in one searchable directory.
-          </p>
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
+                All SmartGrow Tools
+              </h1>
+              <p className="mt-2.5 text-base text-slate-600 max-w-2xl">
+                Every SEO generator, marketing calculator, editorial counter, and PDF utility in one searchable directory.
+              </p>
+            </div>
+            <Link
+              to="/pdf-tools"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-purple-700 hover:text-purple-800 whitespace-nowrap"
+            >
+              <span>Dedicated PDF Tools Directory</span>
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </Link>
+          </div>
 
           <div className="mt-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
             <div className="relative w-full lg:max-w-md">
@@ -91,7 +116,7 @@ export function AllToolsPage() {
                 type="search"
                 value={query}
                 onChange={(e) => handleQueryChange(e.target.value)}
-                placeholder="Search by tool name or keyword..."
+                placeholder="Search all 35 marketing & PDF tools..."
                 aria-label="Filter tools directory"
                 className="w-full rounded-xl border border-slate-300 bg-white pl-10 pr-4 py-2.5 text-sm text-slate-900 focus:border-blue-600 focus:outline-none"
               />
@@ -100,24 +125,24 @@ export function AllToolsPage() {
             <div className="flex flex-wrap items-center gap-1 p-1 bg-slate-200/70 rounded-lg">
               <button
                 type="button"
-                aria-pressed={selectedCategory === 'all'}
-                onClick={() => setSelectedCategory('all')}
+                aria-pressed={selectedFilter === 'all'}
+                onClick={() => setSelectedFilter('all')}
                 className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors whitespace-nowrap ${
-                  selectedCategory === 'all'
+                  selectedFilter === 'all'
                     ? 'bg-white text-blue-700 shadow-xs'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                All ({TOOLS.length})
+                All ({combinedTools.length})
               </button>
               {CATEGORIES.map((cat) => (
                 <button
                   key={cat.id}
                   type="button"
-                  aria-pressed={selectedCategory === cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
+                  aria-pressed={selectedFilter === cat.id}
+                  onClick={() => setSelectedFilter(cat.id)}
                   className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors whitespace-nowrap ${
-                    selectedCategory === cat.id
+                    selectedFilter === cat.id
                       ? 'bg-white text-blue-700 shadow-xs'
                       : 'text-slate-600 hover:text-slate-900'
                   }`}
@@ -125,6 +150,18 @@ export function AllToolsPage() {
                   {cat.navLabel}
                 </button>
               ))}
+              <button
+                type="button"
+                aria-pressed={selectedFilter === 'pdf'}
+                onClick={() => setSelectedFilter('pdf')}
+                className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors whitespace-nowrap ${
+                  selectedFilter === 'pdf'
+                    ? 'bg-white text-purple-700 shadow-xs'
+                    : 'text-slate-600 hover:text-slate-900'
+                }`}
+              >
+                PDF Tools ({PDF_TOOLS.length})
+              </button>
             </div>
           </div>
         </div>
@@ -135,13 +172,13 @@ export function AllToolsPage() {
           {filteredTools.length === 0 ? (
             <div className="border border-slate-200 rounded-xl p-10 text-center">
               <p className="text-sm text-slate-600 mb-4">
-                No tools matched "{query}". Clear the search box to view all 10 tools.
+                No tools matched "{query}". Clear the search box to view all {combinedTools.length} tools.
               </p>
               <button
                 type="button"
                 onClick={() => {
                   handleQueryChange('');
-                  setSelectedCategory('all');
+                  setSelectedFilter('all');
                 }}
                 className="px-4 py-2 rounded-lg bg-blue-600 text-white text-xs font-semibold hover:bg-blue-700 transition-colors"
               >
@@ -157,7 +194,11 @@ export function AllToolsPage() {
                   className="group bg-white border border-slate-200 rounded-xl p-6 hover:border-blue-300 transition-colors flex flex-col justify-between"
                 >
                   <div>
-                    <div className="text-xs font-medium text-purple-700 mb-2">
+                    <div
+                      className={`text-xs font-medium mb-2 ${
+                        tool.suite === 'pdf' ? 'text-blue-700' : 'text-purple-700'
+                      }`}
+                    >
                       {tool.categoryName}
                     </div>
                     <h2 className="font-display text-lg font-bold text-slate-900 group-hover:text-blue-700 transition-colors">

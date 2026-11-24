@@ -18,6 +18,12 @@ const AllToolsPage = lazy(() =>
 const ToolDetailPage = lazy(() =>
   import('./pages/ToolDetailPage').then((m) => ({ default: m.ToolDetailPage }))
 );
+const PdfToolsDirectoryPage = lazy(() =>
+  import('./pages/PdfToolsDirectoryPage').then((m) => ({ default: m.PdfToolsDirectoryPage }))
+);
+const PdfToolDetailPage = lazy(() =>
+  import('./pages/PdfToolDetailPage').then((m) => ({ default: m.PdfToolDetailPage }))
+);
 const ArticlesPage = lazy(() =>
   import('./pages/ArticlesPage').then((m) => ({ default: m.ArticlesPage }))
 );
@@ -62,7 +68,7 @@ function NotFoundPage() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-24 text-center">
         <h1 className="font-display text-3xl font-bold text-slate-900">Page Not Found</h1>
         <p className="mt-3 text-slate-600">
-          The URL you visited does not exist. Return to the homepage or browse all 10 tools.
+          The URL you visited does not exist. Return to the homepage or browse all marketing and PDF tools.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-3">
           <Link
@@ -75,7 +81,13 @@ function NotFoundPage() {
             to="/tools"
             className="px-5 py-2.5 rounded-lg border border-slate-200 text-slate-700 text-sm font-semibold hover:bg-slate-50 transition-colors"
           >
-            All Tools
+            Marketing Tools
+          </Link>
+          <Link
+            to="/pdf-tools"
+            className="px-5 py-2.5 rounded-lg border border-slate-200 text-slate-700 text-sm font-semibold hover:bg-slate-50 transition-colors"
+          >
+            PDF Tools
           </Link>
         </div>
       </div>
@@ -105,6 +117,8 @@ export default function App() {
             />
             <Route path="/tools" element={<AllToolsPage />} />
             <Route path="/tools/:slug" element={<ToolDetailPage />} />
+            <Route path="/pdf-tools" element={<PdfToolsDirectoryPage />} />
+            <Route path="/pdf-tools/:slug" element={<PdfToolDetailPage />} />
             <Route path="/articles" element={<ArticlesPage />} />
             <Route path="/articles/:slug" element={<ArticleDetailPage />} />
             <Route path="/about" element={<AboutPage />} />
